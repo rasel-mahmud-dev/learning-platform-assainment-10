@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import Courses from "./pages/Courses/Courses";
 import CourseDetail, { fetchCourseDetail } from "./pages/CourseDetail/CourseDetail.jsx";
 import AboutPage from "./pages/AboutPage/AboutPage.jsx";
+import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 
 const router = createBrowserRouter([
     {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
                 loader: fetchCourseDetail,
                 element: <CourseDetail />,
             },
+            { path: "/login", element: <LoginPage /> },
             { path: "/about", element: <AboutPage /> },
         ],
     },

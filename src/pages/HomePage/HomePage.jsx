@@ -189,7 +189,7 @@ const HomePage = (props) => {
                         Collaboratively actualize mission-critical partnerships with integrated portals. Authoritatively
                         optimize low-risk high-yield metrics and plug-and-play potentialities.
                     </p>
-                    <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+                    <div className="mt-10 !max-w-5xl mx-auto flex flex-wrap items-center justify-center gap-3">
                         {categories.map((cat) => (
                             <li
                                 onClick={() => handleFilterPopularCourse(cat.id)}
@@ -229,12 +229,12 @@ const HomePage = (props) => {
                     </p>
                     <div className="mt-10 grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
                         {new Array(10).fill(1).map((_, index) => (
-                            <div className="card rounded-md border border-neutral/10">
+                            <div className="card rounded-md shadow bg-base-100">
                                 <img className="w-full" src="/mosh_channels4_profile.jpg" alt="" />
                                 <div className="p-4">
                                     <h4 className="text-base font-medium mb-1">Mosh Hamedani</h4>
                                     <div className="flex items-center gap-x-2">
-                                        <Rating rate={5} id="d" /> <span className="text-sm font-bold">5.0</span>
+                                        <Rating rate={5} id="d" /> <span className="text-sm font-bold">(5233)</span>
                                     </div>
                                     <span className="text-sm font-bold mt-1"> Total Courses 50</span>
                                 </div>

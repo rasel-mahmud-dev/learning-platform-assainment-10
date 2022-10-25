@@ -6,7 +6,7 @@ import Rating from "../Rating";
 
 export default function Course({ course }) {
     return (
-        <div className="card !rounded-lg bg-white border border-neutral/10 ">
+        <div className="card !rounded-lg shadow bg-base-100">
             <Link to={`/course-detail/${course.id}`} className="">
                 <div className="relative">
                     <div className="">

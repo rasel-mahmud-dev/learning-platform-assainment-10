@@ -3,10 +3,9 @@
 .home-page section{
     padding: 80px 0;
 }
-.home-page section:nth-child(2){
+.home-page section:nth-child(2),
+.home-page section:nth-child(4),
+.home-page section:nth-child(6){
     background: #f8f8ff;
 }
 
-.home-page section:nth-child(4){
-    background: #f8f8ff;
-}
