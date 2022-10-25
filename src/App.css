@@ -1,0 +1,11 @@
+.container{
+    max-width: 1400px !important;
+    margin: auto ;
+    padding-left: 15px;
+    padding-right: 15px;
+
+}
+
+.section-title {
+    @apply text-primary-400 text-center text-lg font-semibold my-4;
+}

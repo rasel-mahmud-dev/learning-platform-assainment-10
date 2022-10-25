@@ -1,8 +1,31 @@
-import React from "react";
-import Sidebar from "../../components/Sidebar/Sidebar.jsx";
+import React, { useContext, useEffect, useState } from "react";
+
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+
+import "./style.css";
+import Rating from "../../components/Rating.jsx";
+import Button from "../../components/Button/Button.jsx";
+import AppContext from "../../context/AppContext.jsx";
+import { fetchAllCourses } from "../Courses/Courses.jsx";
+import Course from "../../components/Course/Course";
 import { Link } from "react-router-dom";
 
 const HomePage = (props) => {
+    const {
+        state: { courses },
+        setCourses,
+    } = useContext(AppContext);
+
+    const [filterByPopularCourse, setFilterByPopularCourse] = useState(0);
+
+    useEffect(() => {
+        setCourses(fetchAllCourses());
+    }, []);
+
     const categories = [
         { id: 1, name: "Web development" },
         { id: 2, name: "App development" },
@@ -15,42 +38,212 @@ const HomePage = (props) => {
         { id: 6, name: "Logo Design" },
     ];
 
+    function handleFilterPopularCourse(courseId) {
+        setFilterByPopularCourse(courseId);
+    }
+
     return (
-        <div className="">
-            <Sidebar isOpen={true}>
-                <div className="p-5">
-                    <h1>Popular Topic </h1>
-                    <div className="mt-1">
-                        {categories.map((category) => (
-                            <div className="text-base-700 cursor-pointer py-1 font-medium">
-                                <Link to={`courses/?cat=${category.name}`}>{category.name}</Link>
+        <div className="home-page">
+            <section className="hero-section !p-0">
+                <Swiper
+                    slidesPerView={1}
+                    onSlideChange={() => console.log("slide change")}
+                    onSwiper={(swiper) => console.log(swiper)}
+                >
+                    <SwiperSlide>
+                        <div>
+                            <img className="w-full" src="/8801001_8572.jpg" alt="" />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        {" "}
+                        <div>
+                            <img src="/8801001_8572.jpg" alt="" />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        {" "}
+                        <div>
+                            <img src="/8801001_8572.jpg" alt="" />
+                        </div>
+                    </SwiperSlide>
+                </Swiper>
+            </section>
+
+            <section>
+                <div className="container">
+                    <h4 className="section-title">OUR COURSE CATEGORIES</h4>
+                    <h1 className="text-3xl text-neutral font-bold text-center">Explore Top Categories</h1>
+                    <div className="grid grid-cols-3 mt-10">
+                        {categories.map((cat) => (
+                            <div className="flex items-start gap-5 p-5">
+                                <img className="w-10" src="category_1_1.svg" alt="logo" />
+                                <div>
+                                    <h4 className="text-2xl text-neutral font-medium">{cat.name}</h4>
+                                    <p className="text-neutral/60">
+                                        Globally maintain magnetic process with model foster data after ubiuitous
+                                        architectures.
+                                    </p>
+                                </div>
                             </div>
                         ))}
                     </div>
                 </div>
-            </Sidebar>
-            <div className="content">
-                <h1>Hero</h1>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, amet aperiam architecto
-                    asperiores, beatae commodi cupiditate dolor, est et eveniet maiores nesciunt nostrum numquam
-                    officiis quibusdam quos tempore voluptatum. A accusamus animi consequuntur cumque impedit laborum
-                    perferendis quibusdam voluptatibus! Aspernatur distinctio dolorum earum et excepturi expedita fuga
-                    illum ipsa magnam molestias natus necessitatibus nisi nostrum obcaecati odio odit officia officiis
-                    quam quia quidem, quo, repellendus repudiandae unde? Blanditiis consequatur cum, dignissimos dolore
-                    doloremque dolorum et exercitationem explicabo hic incidunt iure labore maxime molestias, natus
-                    nihil nobis numquam perspiciatis quos ratione recusandae reiciendis similique sint tempora veniam
-                    veritatis. Ad beatae blanditiis corporis dicta dignissimos eaque eligendi eum expedita labore,
-                    laudantium porro quia rem tempora? At debitis et fugit impedit magni molestiae molestias nam natus
-                    nemo nihil nulla officia pariatur perferendis praesentium quas rem, sit velit voluptatem. Autem
-                    beatae, debitis dicta distinctio dolor est facere fugiat, iure iusto laudantium libero molestiae
-                    natus provident quam quia recusandae repudiandae sapiente. At deserunt pariatur voluptate? Accusamus
-                    adipisci consequuntur corporis dolorum eligendi et eum, explicabo incidunt itaque molestias numquam
-                    provident rerum similique sint tenetur. Aut deleniti dicta doloremque dolores optio rerum sunt
-                    tempore voluptatem? Accusantium dolore earum eos facere harum illum iste magnam minus perspiciatis
-                    sint!
-                </p>
-            </div>
+            </section>
+
+            {/******* Core Features *******/}
+            <section>
+                <div className="!max-w-5xl mx-auto">
+                    <h4 className="section-title">MORE ABOUT US</h4>
+                    <h1 className="text-3xl text-neutral-900 font-bold text-center">
+                        We are innovative educational institution to the creation of the student
+                    </h1>
+                    <p className="mt-10 text-center text-gray-500">
+                        Compellingly procrastinate equity invested markets with efficient process improvements.
+                        Collaboratively actualize mission-critical partnerships with integrated portals. Authoritatively
+                        optimize low-risk high-yield metrics and plug-and-play potentialities.
+                    </p>
+                    <div className="mt-10 flex items-center justify-evenly">
+                        <li className="list-none flex items-start gap-2">
+                            <div>
+                                <img src="/counter_1_1.svg" alt="" />
+                            </div>
+                            <span>
+                                <p className="text-2xl text-blue font-bold text-primary-400">250</p>
+                                <p className="text-neutral/90 font-medium text-sm">FINISHED WEBINARS</p>
+                            </span>
+                        </li>
+                        <li className="list-none flex items-start gap-2">
+                            <div>
+                                <img src="/counter_1_1.svg" alt="" />
+                            </div>
+                            <span>
+                                <p className="text-2xl text-blue font-bold text-primary-400">250</p>
+                                <p className="text-neutral/90 font-medium text-sm">FINISHED WEBINARS</p>
+                            </span>
+                        </li>
+                        <li className="list-none flex items-start gap-2">
+                            <div>
+                                <img src="/counter_1_1.svg" alt="" />
+                            </div>
+                            <span>
+                                <p className="text-2xl text-blue font-bold text-primary-400">250</p>
+                                <p className="text-neutral/90 font-medium text-sm">FINISHED WEBINARS</p>
+                            </span>
+                        </li>
+                    </div>
+                </div>
+            </section>
+
+            {/***** More About us *******/}
+            <section className="">
+                <div className="!max-w-5xl mx-auto">
+                    <h4 className="section-title">E-Coaching Core Features</h4>
+                    <h1 className="text-3xl text-neutral-900 font-bold text-center">
+                        We are innovative educational institution to the creation of the student
+                    </h1>
+                    <p className="mt-10 text-center text-gray-500">
+                        Compellingly procrastinate equity invested markets with efficient process improvements.
+                        Collaboratively actualize mission-critical partnerships with integrated portals. Authoritatively
+                        optimize low-risk high-yield metrics and plug-and-play potentialities.
+                    </p>
+                    <div className="mt-10 flex items-center justify-evenly">
+                        <li className="list-none flex items-start gap-2">
+                            <div>
+                                <img src="/counter_1_1.svg" alt="" />
+                            </div>
+                            <span>
+                                <p className="text-2xl text-blue font-bold text-primary-400">250</p>
+                                <p className="text-neutral/90 font-medium text-sm">FINISHED WEBINARS</p>
+                            </span>
+                        </li>
+                        <li className="list-none flex items-start gap-2">
+                            <div>
+                                <img src="/counter_1_1.svg" alt="" />
+                            </div>
+                            <span>
+                                <p className="text-2xl text-blue font-bold text-primary-400">250</p>
+                                <p className="text-neutral/90 font-medium text-sm">FINISHED WEBINARS</p>
+                            </span>
+                        </li>
+                        <li className="list-none flex items-start gap-2">
+                            <div>
+                                <img src="/counter_1_1.svg" alt="" />
+                            </div>
+                            <span>
+                                <p className="text-2xl text-blue font-bold text-primary-400">250</p>
+                                <p className="text-neutral/90 font-medium text-sm">FINISHED WEBINARS</p>
+                            </span>
+                        </li>
+                    </div>
+                </div>
+            </section>
+
+            {/***** Popular courses *******/}
+            <section className="">
+                <div className="container">
+                    <h4 className="section-title">POPULAR COURSES</h4>
+                    <h1 className="text-3xl text-neutral-900 font-bold text-center">Our Popular Courses</h1>
+                    <p className="!max-w-5xl mx-auto mt-10 text-gray-500">
+                        Compellingly procrastinate equity invested markets with efficient process improvements.
+                        Collaboratively actualize mission-critical partnerships with integrated portals. Authoritatively
+                        optimize low-risk high-yield metrics and plug-and-play potentialities.
+                    </p>
+                    <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+                        {categories.map((cat) => (
+                            <li
+                                onClick={() => handleFilterPopularCourse(cat.id)}
+                                className={`list-none px-4 py-1 text-sm rounded cursor-pointer
+                            text-neutral-900 font-medium whitespace-nowrap rounded-xl border border-neutral/10
+                            ${filterByPopularCourse === cat.id ? "bg-primary-400 text-white" : ""}
+                            `}
+                            >
+                                {cat.name}
+                            </li>
+                        ))}
+                    </div>
+                    {courses && (
+                        <>
+                            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+                                {courses.map((course) => (
+                                    <Course course={course} />
+                                ))}
+                            </div>
+                            <Link to="/courses">
+                                <Button className="bg-primary-400 block mx-auto mt-5">View more courses</Button>
+                            </Link>
+                        </>
+                    )}
+                </div>
+            </section>
+
+            {/***** Our Instructor *******/}
+            <section className="">
+                <div className="container mx-auto">
+                    <h4 className="section-title">BEST ONLINE INSTRUCTOR</h4>
+                    <h1 className="text-3xl text-neutral-900 font-bold text-center">Our Popular Courses</h1>
+                    <p className="mt-10 !max-w-5xl mx-auto text-gray-500">
+                        Seamlessly target robust quality vectors and goals oriented architectures propriately enegdrages
+                        one-to-one resources after standardized scenarios adaptive experiences exceptional resources
+                        service depend lifestyle carefully
+                    </p>
+                    <div className="mt-10 grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                        {new Array(10).fill(1).map((_, index) => (
+                            <div className="card rounded-md border border-neutral/10">
+                                <img className="w-full" src="/mosh_channels4_profile.jpg" alt="" />
+                                <div className="p-4">
+                                    <h4 className="text-base font-medium mb-1">Mosh Hamedani</h4>
+                                    <div className="flex items-center gap-x-2">
+                                        <Rating rate={5} id="d" /> <span className="text-sm font-bold">5.0</span>
+                                    </div>
+                                    <span className="text-sm font-bold mt-1"> Total Courses 50</span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    <Button className="bg-primary-400 block mx-auto mt-5">Show All Instructor</Button>
+                </div>
+            </section>
         </div>
     );
 };

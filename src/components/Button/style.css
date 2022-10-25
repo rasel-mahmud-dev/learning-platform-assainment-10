@@ -1,0 +1,9 @@
+
+.my-btn{
+    outline: none;
+    border-radius: 4px;
+    border: none;
+    padding: 8px 16px;
+    color: white;
+    font-weight: 400;
+}
