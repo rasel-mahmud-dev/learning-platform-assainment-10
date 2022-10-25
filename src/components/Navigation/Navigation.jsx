@@ -8,8 +8,8 @@ const Navigation = () => {
             <div className="navbar z-40 bg-base-100 top-0 left-0 fixed shadow-md">
                 <div className="container">
                     <div className="flex-1">
-                        <Link to="/" className="btn btn-ghost normal-case text-xl">
-                            E-Coaching
+                        <Link to="/" className="">
+                            <img src="/logo.svg" alt="" className="w-40" />
                         </Link>
                     </div>
                     <div className="flex items-center">
@@ -22,8 +22,8 @@ const Navigation = () => {
                         <NavLink active="active" to="/blogs" className="btn btn-ghost normal-case text-md">
                             Blogs
                         </NavLink>
-                        <NavLink active="active" to="/faqs" className="btn btn-ghost normal-case text-md">
-                            FAQS
+                        <NavLink active="active" to="/faq" className="btn btn-ghost normal-case text-md">
+                            FAQs
                         </NavLink>
                         <NavLink active="active" to="/about" className="btn btn-ghost normal-case text-md" id="SDA">
                             About

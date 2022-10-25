@@ -4,7 +4,7 @@ import Button from "../../components/Button/Button.jsx";
 import { Link } from "react-router-dom";
 import { BsGithub, BsGoogle, CgLock } from "react-icons/all.js";
 
-const LoginPage = (props) => {
+const RegistrationPage = (props) => {
     const {
         register,
         handleSubmit,
@@ -17,9 +17,21 @@ const LoginPage = (props) => {
         <div>
             <div className="shadow-lg bg-base-100 rounded-box max-w-md mx-auto m-10 px-5 py-10">
                 <h1 className="text-2xl font-bold text-center">Welcome to E-Coaching</h1>
-                <h1 className="text-lg font-bold text-center my-5">Login your account</h1>
+                <h1 className="text-lg font-bold text-center my-5">Sign Up and Start Learning!</h1>
+
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div>
+                        <label htmlFor="" className="font-medium mb-1 inline-block">
+                            FullName
+                        </label>
+                        <input
+                            type="email"
+                            {...register("fullName", { required: true })}
+                            placeholder="Your full name"
+                            className="input input-bordered input-primary w-full"
+                        />
+                    </div>
+                    <div className="mt-4">
                         <label htmlFor="" className="font-medium mb-1 inline-block">
                             Email
                         </label>
@@ -45,18 +57,14 @@ const LoginPage = (props) => {
                     {errors.exampleRequired && <span>This field is required</span>}
 
                     <div className="mt-4">
-                        Forget Password?
-                        <Link
-                            to="/reset-password"
-                            state={{ email: "", redirect: "" }}
-                            className="link ml-2 text-blue-500 "
-                        >
-                            Click to reset
+                        Already have an Account?
+                        <Link to="/login" state={{ email: "", redirect: "" }} className="link ml-2 text-blue-500 ">
+                            Click to login
                         </Link>
                     </div>
 
                     <Button className="bg-primary-400 mt-3 w-full" type="submit">
-                        Login
+                        Create Account
                     </Button>
 
                     <div className="divider text-sm py-4">Not an Account?</div>
@@ -81,12 +89,6 @@ const LoginPage = (props) => {
                                 Login With Github
                             </span>
                         </Button>
-                        <Button className="bg-blue-500 justify-center items-center flex w-full px-4 py-2 border-none text-white font-semibold text-sm rounded-md mt-2">
-                            <Link to={`/registration`} className="flex items-center">
-                                <CgLock className="mr-2 text-md" />
-                                With Email & Password
-                            </Link>
-                        </Button>
                     </div>
 
                     <p className="text-center mb-4 mt-6 dark:text-neutral-400">
@@ -101,4 +103,4 @@ const LoginPage = (props) => {
     );
 };
 
-export default LoginPage;
+export default RegistrationPage;
