@@ -1,6 +1,8 @@
 root = true
 
 [*]
+indent_size = 4
+tab_width = 4
 ij_continuation_indent_size = 8
 ij_formatter_off_tag = @formatter:off
 ij_formatter_on_tag = @formatter:on
@@ -11,4 +13,3 @@ ij_wrap_on_typing = true
 ij_any_wrap_long_lines = true
 max_line_length = 120
 ij_any_keep_line_breaks = true
-# singleAttributePerLine = true
