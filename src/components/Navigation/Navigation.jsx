@@ -2,12 +2,13 @@ import React, { useContext, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./navigation.css";
 import AppContext from "../../context/AppContext.jsx";
-import { FaSignInAlt } from "react-icons/all";
+import { BsSunFill, FaMoon, FaSignInAlt } from "react-icons/all";
+import Button from "../Button/Button.jsx";
 
 const Navigation = () => {
     const {
-        state: { auth },
-        actions: { logOutHandler },
+        state: { auth, isDarkMode },
+        actions: { logOutHandler, toggleTheme },
     } = useContext(AppContext);
 
     const navigate = useNavigate();
@@ -35,16 +36,30 @@ const Navigation = () => {
         return letterOne + letterTwo;
     }
 
+    function switchThemeHandler(theme) {
+        toggleTheme(theme === "dark");
+        let root = window.document.documentElement;
+        if (root.classList.contains("dark")) {
+            root.classList.remove("dark");
+            root.classList.add("light");
+        } else {
+            root.classList.add("dark");
+            root.classList.remove("light");
+        }
+
+        window.localStorage.setItem("theme", theme);
+    }
+
     return (
         <div>
-            <div className="navbar z-40 bg-base-100 top-0 left-0 fixed shadow-md">
+            <div className="navbar z-40 dark:bg-neutral-focus bg-base-100 top-0 left-0 fixed shadow-md">
                 <div className="container">
                     <div className="flex-1">
                         <Link to="/" className="">
                             <img src="/logo.svg" alt="" className="w-40" />
                         </Link>
                     </div>
-                    <div className="flex items-center">
+                    <div className="flex items-center dark:text-white">
                         <NavLink to="/" className="btn btn-ghost normal-case text-md">
                             Home
                         </NavLink>
@@ -57,9 +72,23 @@ const Navigation = () => {
                         <NavLink to="/faq" className="btn btn-ghost normal-case text-md">
                             FAQs
                         </NavLink>
-                        <NavLink to="/about" className="btn btn-ghost normal-case text-md" id="SDA">
-                            About
-                        </NavLink>
+                        <span>
+                            {isDarkMode ? (
+                                <Button
+                                    className="btn-circle normal-case text-md px-1 w-6 h-6"
+                                    onClick={() => switchThemeHandler("light")}
+                                >
+                                    <BsSunFill className="text-xl" />
+                                </Button>
+                            ) : (
+                                <Button
+                                    className="btn-circle normal-case text-md px-1 w-6 h-6 text-neutral"
+                                    onClick={() => switchThemeHandler("dark")}
+                                >
+                                    <FaMoon />
+                                </Button>
+                            )}
+                        </span>
                     </div>
                     <div className="flex-none">
                         {auth ? (
@@ -95,7 +124,7 @@ const Navigation = () => {
                                 </ul>
                             </div>
                         ) : (
-                            <NavLink to="/login" className="btn btn-ghost normal-case text-md">
+                            <NavLink to="/login" className="btn btn-ghost normal-case text-md dark:text-white">
                                 <FaSignInAlt />
                                 <span className="ml-1">Login</span>
                             </NavLink>

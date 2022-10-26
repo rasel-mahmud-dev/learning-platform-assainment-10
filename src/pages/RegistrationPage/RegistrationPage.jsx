@@ -46,7 +46,7 @@ const RegistrationPage = (props) => {
 
     return (
         <div>
-            <div className="shadow-around bg-base-100 rounded-box max-w-md mx-auto m-10 px-5 py-10">
+            <div className="shadow-around bg-base-100 rounded-box max-w-md mx-auto m-10 px-5 py-10 login-card">
                 <h1 className="text-2xl font-bold text-center">Welcome to E-Coaching</h1>
                 <h1 className="text-lg font-bold text-center mt-4 mb-7">Sign Up and Start Learning!</h1>
 

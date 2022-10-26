@@ -12,6 +12,7 @@ import BlogPage from "./pages/BlogPage/BlogPage.jsx";
 import FAQs from "./pages/FAQs/FAQs";
 import ProfilePage from "./pages/ProfilePage/ProfilePage.jsx";
 import PrivateRoute from "./middleware/PrivateRoute.jsx";
+import Checkout from "./pages/Checkout/Checkout.jsx";
 
 const router = createBrowserRouter([
     {
@@ -26,6 +27,14 @@ const router = createBrowserRouter([
                 element: <CourseDetail />,
             },
             { path: "/login", element: <LoginPage /> },
+            {
+                path: "/checkout/:courseId",
+                element: (
+                    <PrivateRoute>
+                        <Checkout />
+                    </PrivateRoute>
+                ),
+            },
             {
                 path: "/profile/:id",
                 element: (

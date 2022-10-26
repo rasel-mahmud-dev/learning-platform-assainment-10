@@ -7,14 +7,16 @@
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
-  background: white;
+
+
 }
 
 
 body {
   margin: 0;
   place-items: center;
-  background: white;
-  
+    @apply bg-primary-5 dark:bg-dark-5 dark:text-base-200;
+    min-height: 100vh;
+
 }
 

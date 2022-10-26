@@ -3,9 +3,12 @@
     margin: auto ;
     padding-left: 15px;
     padding-right: 15px;
-
 }
 
 .section-title {
     @apply text-primary-400 text-center text-lg font-semibold my-4;
+}
+
+.login-card{
+    @apply bg-primary-5 dark:bg-primary-5 dark:text-base-200 !shadow-xl;
 }

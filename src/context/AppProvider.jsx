@@ -9,6 +9,7 @@ const AppProvider = (props) => {
         instructors: null,
         auth: null,
         setAuthLoaded: false,
+        isDarkMode: false,
         message: {
             text: "",
             status: 200, // 200 success, 500 error
@@ -24,7 +25,9 @@ const AppProvider = (props) => {
             setAuth: (user) => setState((prev) => ({ ...prev, auth: user })),
             setAuthLoaded: (isLoaded) => setState((prev) => ({ ...prev, isAuthLoaded: isLoaded })),
             setMessage: (message) => setState((prev) => ({ ...prev, message: { ...message } })),
-
+            toggleTheme: (theme) => {
+                setState((prevState) => ({ ...prevState, isDarkMode: !theme ? !prevState.isDarkMode : theme }));
+            },
             loginViaEmailAndPassword,
             loginWithGoogle,
             loginWithGithub,

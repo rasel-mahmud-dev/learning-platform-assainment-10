@@ -35,7 +35,7 @@ const LoginPage = (props) => {
 
     return (
         <div>
-            <div className="shadow-around bg-base-100 rounded-box max-w-md mx-auto m-10 px-5 py-10">
+            <div className="shadow-around bg-base-100 rounded-box max-w-md mx-auto m-10 px-5 py-10 card login-card">
                 <h1 className="text-2xl font-bold text-center">Welcome to E-Coaching</h1>
                 <h3 className="text-lg font-bold text-center my-5">Login your account</h3>
 

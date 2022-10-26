@@ -12,7 +12,7 @@ import AlertMessage from "./components/AlertMessage.jsx";
 function App() {
     const {
         state,
-        actions: { setAuth, setAuthLoaded, setMessage },
+        actions: { setAuth, setAuthLoaded, toggleTheme, setMessage },
     } = useContext(AppContext);
 
     const auth = getAuth();
@@ -35,6 +35,16 @@ function App() {
                 setAuth(null);
             }
         });
+        let theme = window.localStorage.getItem("theme");
+        let root = window.document.documentElement;
+        if (theme && theme === "dark") {
+            toggleTheme(true);
+            root.classList.add("dark");
+        }
+        if (theme && theme === "light") {
+            toggleTheme(false);
+            root.classList.add("light");
+        }
 
         return () => unsubscribe();
     }, []);
