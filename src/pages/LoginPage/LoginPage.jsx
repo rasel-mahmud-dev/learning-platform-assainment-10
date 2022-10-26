@@ -1,17 +1,49 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../../components/Button/Button.jsx";
 import { Link } from "react-router-dom";
 import { BsGithub, BsGoogle, CgLock } from "react-icons/all.js";
+import AppContext from "../../context/AppContext.jsx";
 
 const LoginPage = (props) => {
     const {
+        state,
+        actions: { loginViaEmailAndPassword, loginWithGoogle, loginWithGithub, setMessage },
+    } = useContext(AppContext);
+
+    const {
         register,
         handleSubmit,
+        setError,
         formState: { errors },
     } = useForm();
 
-    const onSubmit = (data) => {};
+    const [formError, setFormError] = useState("");
+
+    const onSubmit = (data) => {
+        let errorMessage = "";
+        for (let errorsKey in errors) {
+            if (errors[errorsKey]) {
+                if (errors[errorsKey].type === "pattern") {
+                    errorMessage =
+                        errorsKey +
+                        ` should be Minimum six characters, at least one uppercase, one
+		                    lowercase and one number`;
+                }
+            }
+        }
+
+        setError("password", { type: "minLength", message: "errorMessage" }, { shouldFocus: true });
+
+        // if (errorMessage) {
+        //
+        //     return;
+        // }
+
+        // loginViaEmailAndPassword(data.email, data.password);
+    };
+
+    console.log(errors);
 
     return (
         <div>
@@ -20,29 +52,36 @@ const LoginPage = (props) => {
                 <h1 className="text-lg font-bold text-center my-5">Login your account</h1>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div>
-                        <label htmlFor="" className="font-medium mb-1 inline-block">
+                        <label htmlFor="email" className="font-medium mb-1 inline-block">
                             Email
                         </label>
                         <input
                             type="email"
+                            id="email"
                             {...register("email", { required: true })}
                             placeholder="Your email"
                             className="input input-bordered input-primary w-full"
                         />
                     </div>
                     <div className="mt-4">
-                        <label htmlFor="" className="font-medium mb-1 inline-block">
+                        <label htmlFor="password" className="font-medium mb-1 inline-block">
                             Password
                         </label>
                         <input
+                            id="password"
                             type="password"
-                            {...register("password", { required: true })}
+                            {...register("password", {
+                                required: true,
+                                minLength: 6,
+                                pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
+                            })}
                             placeholder="Your password"
                             className="input input-bordered input-primary w-full"
                         />
                     </div>
+
                     {/* errors will return when field validation fails  */}
-                    {errors.exampleRequired && <span>This field is required</span>}
+                    {formError && <span>{formError}</span>}
 
                     <div className="mt-4">
                         Forget Password?
@@ -64,6 +103,7 @@ const LoginPage = (props) => {
                     <div className="">
                         <Button
                             type="button"
+                            onClick={loginWithGoogle}
                             className="bg-red-500 justify-center items-center flex w-full px-4 py-2 border-none text-white font-semibold text-sm rounded-md"
                         >
                             <span className="flex items-center">
@@ -74,6 +114,7 @@ const LoginPage = (props) => {
 
                         <Button
                             type="button"
+                            onClick={loginWithGithub}
                             className="bg-gray-700 justify-center items-center flex w-full px-4 py-2 border-none text-white font-semibold text-sm rounded-md mt-2"
                         >
                             <span className="flex items-center">

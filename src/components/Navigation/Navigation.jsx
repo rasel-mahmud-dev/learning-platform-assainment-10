@@ -1,8 +1,37 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./navigation.css";
+import AppContext from "../../context/AppContext.jsx";
+import { FaSignInAlt } from "react-icons/all";
 
 const Navigation = () => {
+    const {
+        state: { auth },
+        actions: { logOutHandler },
+    } = useContext(AppContext);
+
+    const navigate = useNavigate();
+
+    const [openAuthMenu, setOpenAuthMenu] = useState(false);
+
+    function handleLogOut() {
+        logOutHandler()
+            .then(() => {
+                navigate("/");
+            })
+            .catch((ex) => {});
+    }
+
+    function chooseFirstLetter(name) {
+        let letterOne = name[0];
+        let letterTwo = "";
+        let splitName = name.split(" ");
+        if (splitName.length > 1) {
+            letterTwo = splitName[1][0];
+        }
+        return letterOne + letterTwo;
+    }
+
     return (
         <div>
             <div className="navbar z-40 bg-base-100 top-0 left-0 fixed shadow-md">
@@ -13,47 +42,58 @@ const Navigation = () => {
                         </Link>
                     </div>
                     <div className="flex items-center">
-                        <NavLink active="active" to="/" className="btn btn-ghost normal-case text-md">
+                        <NavLink to="/" className="btn btn-ghost normal-case text-md">
                             Home
                         </NavLink>
-                        <NavLink active="active" to="/courses" className="btn btn-ghost normal-case text-md">
+                        <NavLink to="/courses" className="btn btn-ghost normal-case text-md">
                             Courses
                         </NavLink>
-                        <NavLink active="active" to="/blogs" className="btn btn-ghost normal-case text-md">
+                        <NavLink to="/blogs" className="btn btn-ghost normal-case text-md">
                             Blogs
                         </NavLink>
-                        <NavLink active="active" to="/faq" className="btn btn-ghost normal-case text-md">
+                        <NavLink to="/faq" className="btn btn-ghost normal-case text-md">
                             FAQs
                         </NavLink>
-                        <NavLink active="active" to="/about" className="btn btn-ghost normal-case text-md" id="SDA">
+                        <NavLink to="/about" className="btn btn-ghost normal-case text-md" id="SDA">
                             About
                         </NavLink>
                     </div>
                     <div className="flex-none">
-                        <div className="dropdown dropdown-end">
-                            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                                <div className="w-9 rounded-full">
-                                    <img src="/core-avatar-250.jpg" />
-                                </div>
-                            </label>
-                            <ul
-                                tabIndex={0}
-                                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                        {auth ? (
+                            <div
+                                className="relative"
+                                onMouseOver={() => setOpenAuthMenu(true)}
+                                onMouseLeave={() => setOpenAuthMenu(false)}
                             >
-                                <li>
-                                    <a className="justify-between">
-                                        Profile
-                                        <span className="badge">New</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>Settings</a>
-                                </li>
-                                <li>
-                                    <a>Logout</a>
-                                </li>
-                            </ul>
-                        </div>
+                                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                    <div className="avatar placeholder">
+                                        <div className="bg-neutral-focus text-neutral-content rounded-full w-9">
+                                            {auth.photoURL ? (
+                                                <img src={auth.photoURL} alt="avatar" />
+                                            ) : (
+                                                <span>{chooseFirstLetter(auth.displayName)}</span>
+                                            )}
+                                        </div>
+                                    </div>
+                                </label>
+                                <ul
+                                    tabIndex={0}
+                                    className={`absolute opacity-0 invisible top-8 -right-3 mt-3 p-4 shadow-xl bg-base-100 rounded-box w-52 ${
+                                        openAuthMenu ? "!opacity-100 !visible" : ""
+                                    }`}
+                                >
+                                    <li className="pt-1">{auth.displayName}</li>
+                                    <li className="pt-1 link cursor-pointer" onClick={handleLogOut}>
+                                        Logout
+                                    </li>
+                                </ul>
+                            </div>
+                        ) : (
+                            <NavLink to="/login" className="btn btn-ghost normal-case text-md">
+                                <FaSignInAlt />
+                                <span className="ml-1">Login</span>
+                            </NavLink>
+                        )}
                     </div>
                 </div>
             </div>

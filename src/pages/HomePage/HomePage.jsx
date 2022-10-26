@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 const HomePage = (props) => {
     const {
         state: { courses },
-        setCourses,
+        actions: { setCourses },
     } = useContext(AppContext);
 
     const [filterByPopularCourse, setFilterByPopularCourse] = useState(0);

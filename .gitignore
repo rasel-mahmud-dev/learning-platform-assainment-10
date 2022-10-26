@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.env
+
+https://hero-test-auth.firebaseapp.com/__/auth/handler
+2839abfbcf0b741d1e65591727c10b95149966f5
+bbe5064582058b7de2e8

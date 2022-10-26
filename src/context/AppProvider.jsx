@@ -1,15 +1,30 @@
 import React, { useState } from "react";
 import AppContext from "./AppContext";
+import { loginViaEmailAndPassword, loginWithGithub, loginWithGoogle, logOutHandler } from "../firebase/authHandler";
 
 const AppProvider = (props) => {
-  const [state, setState] = useState({
-    courses: [],
-  });
-  const value = {
-    state,
-    setCourses: (v) => setState((prev) => ({ ...prev, courses: v })),
-  };
-  return <AppContext.Provider value={value}>{props.children}</AppContext.Provider>;
+    const [state, setState] = useState({
+        courses: [],
+        auth: null,
+        message: {
+            text: "",
+            status: 200, // 200 success, 500 error
+        },
+    });
+
+    const value = {
+        state,
+        actions: {
+            setCourses: (v) => setState((prev) => ({ ...prev, courses: v })),
+            setAuth: (user) => setState((prev) => ({ ...prev, auth: user })),
+            setMessage: (message) => setState((prev) => ({ ...prev, message: { ...message } })),
+            loginViaEmailAndPassword,
+            loginWithGoogle,
+            loginWithGithub,
+            logOutHandler,
+        },
+    };
+    return <AppContext.Provider value={value}>{props.children}</AppContext.Provider>;
 };
 
 export default AppProvider;
