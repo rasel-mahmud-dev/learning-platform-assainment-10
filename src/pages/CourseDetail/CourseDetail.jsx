@@ -9,7 +9,7 @@ import Button from "../../components/Button/Button.jsx";
 const CourseDetail = (props) => {
     const details = useLoaderData();
 
-    console.log(details);
+    function handleDownloadPdf() {}
 
     return (
         <div className="container mt-10">
@@ -45,10 +45,14 @@ const CourseDetail = (props) => {
                         <span className="text-gray-700">{details.subtitle}</span>
                     </div>
 
-                    <div className="mt-6">
+                    <div className="mt-6 flex gap-x-4">
                         <Link to={`/checkout/${details.id}`}>
-                            <Button className="bg-primary-400">Buy Now</Button>
+                            <Button className="bg-primary-400">Purchase Now</Button>
                         </Link>
+
+                        <Button onClick={handleDownloadPdf} className="bg-primary-400">
+                            Download Details
+                        </Button>
                     </div>
                 </div>
             </div>

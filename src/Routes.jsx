@@ -13,11 +13,13 @@ import FAQs from "./pages/FAQs/FAQs";
 import ProfilePage from "./pages/ProfilePage/ProfilePage.jsx";
 import PrivateRoute from "./middleware/PrivateRoute.jsx";
 import Checkout from "./pages/Checkout/Checkout.jsx";
+import NotFound from "./components/NotFound/NotFound.jsx";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <App />,
+        errorElement: <NotFound />,
         children: [
             { path: "/", element: <HomePage />, loader: fetchAllCourses },
             { path: "/courses", element: <Courses />, loader: fetchAllCourses },

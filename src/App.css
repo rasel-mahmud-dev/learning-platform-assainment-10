@@ -8,6 +8,12 @@
 .section-title {
     @apply text-primary-400 text-center text-lg font-semibold my-4;
 }
+.section-sub-title{
+    @apply text-3xl dark:text-base-300/90 text-neutral-focus font-bold text-center;
+}
+.section-desc {
+    @apply  dark:text-base-300/60 text-neutral
+}
 
 .login-card{
     @apply bg-primary-5 dark:bg-primary-5 dark:text-base-200 !shadow-xl;
