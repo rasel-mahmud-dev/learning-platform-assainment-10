@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import AppContext from "./AppContext";
-import { loginViaEmailAndPassword, loginWithGithub, loginWithGoogle, logOutHandler } from "../firebase/authHandler";
+import {
+    passwordResetEmail,
+    loginViaEmailAndPassword,
+    loginWithGithub,
+    loginWithGoogle,
+    logOutHandler,
+} from "../firebase/authHandler";
 
 const AppProvider = (props) => {
     const [state, setState] = useState({
@@ -32,6 +38,7 @@ const AppProvider = (props) => {
             loginWithGoogle,
             loginWithGithub,
             logOutHandler,
+            passwordResetEmail,
         },
     };
     return <AppContext.Provider value={value}>{props.children}</AppContext.Provider>;

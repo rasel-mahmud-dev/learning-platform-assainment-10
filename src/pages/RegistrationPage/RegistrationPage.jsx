@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../../components/Button/Button.jsx";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BsGithub, BsGoogle, CgLock } from "react-icons/all.js";
 import InputGroup from "../../components/InputGroup/InputGroup.jsx";
 
@@ -13,6 +13,9 @@ const RegistrationPage = (props) => {
         state: { auth },
         actions: { setMessage, setAuth, loginWithGoogle, loginWithGithub },
     } = useContext(AppContext);
+
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const {
         register,
@@ -32,21 +35,26 @@ const RegistrationPage = (props) => {
                 displayName: data.fullName,
                 photoURL: data.profile_photo,
             })
-                .then((r) => {
+                .then(() => {
                     // also update client side auth data
                     setAuth({
                         ...auth,
                         displayName: data.fullName,
                         photoURL: data.profile_photo,
                     });
+                    if (location.state && location.state.from) {
+                        navigate(location.state.from, { replace: true });
+                    } else {
+                        navigate("/", { replace: true });
+                    }
                 })
-                .catch((ex) => {});
+                .catch(() => {});
         }
     };
 
     return (
         <div>
-            <div className="shadow-around bg-base-100 rounded-box max-w-md mx-auto m-10 px-5 py-10 login-card">
+            <div className="shadow-around bg-base-100 rounded-box max-w-lg mx-auto m-10 px-6 py-10 login-card">
                 <h1 className="text-2xl font-bold text-center">Welcome to E-Coaching</h1>
                 <h1 className="text-lg font-bold text-center mt-4 mb-7">Sign Up and Start Learning!</h1>
 
@@ -83,7 +91,7 @@ const RegistrationPage = (props) => {
                         type="password"
                         register={register("password", {
                             required: "Password required",
-                            minLength: { value: 6, message: "Password should be min 6 chracter" },
+                            minLength: { value: 6, message: "Password should be min 6 character" },
                             pattern: {
                                 value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/,
                                 message:
@@ -97,7 +105,7 @@ const RegistrationPage = (props) => {
 
                     <div className="mt-4 text-sm">
                         Already have an Account?
-                        <Link to="/login" state={{ email: "", redirect: "" }} className="link ml-2 text-blue-500 ">
+                        <Link to="/login" state={location.state} className="link ml-2 text-blue-500 ">
                             Click to login
                         </Link>
                     </div>
@@ -131,7 +139,7 @@ const RegistrationPage = (props) => {
                             </span>
                         </Button>
                         <Button className="bg-blue-500 justify-center items-center flex w-full px-4 py-2 border-none text-white font-semibold text-sm rounded-md mt-2">
-                            <Link to={`/login`} className="flex items-center">
+                            <Link to={`/login`} state={location.state} className="flex items-center">
                                 <CgLock className="mr-2 text-md" />
                                 Login With Password
                             </Link>

@@ -18,7 +18,7 @@ const Navigation = () => {
     function handleLogOut() {
         logOutHandler()
             .then(() => {
-                navigate("/");
+                navigate("/login");
             })
             .catch((ex) => {});
     }

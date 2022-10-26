@@ -15,7 +15,7 @@ const AlertMessage = ({ message, setMessage }) => {
         <div className="">
             {message.text && (
                 <div
-                    className={`alert shadow-lg w-11/12 max-w-xl mx-auto fixed top-20 md:top-28 left-1/2 -translate-x-1/2 ${
+                    className={`alert z-50 shadow-lg w-11/12 max-w-xl mx-auto fixed top-20 md:top-28 left-1/2 -translate-x-1/2 ${
                         message.status === 200 ? "!bg-primary-400 text-white" : "alert-error"
                     }`}
                 >

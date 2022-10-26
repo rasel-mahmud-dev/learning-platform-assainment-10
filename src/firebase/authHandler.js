@@ -7,6 +7,7 @@ import {
     signInWithPopup,
     signOut,
     updateProfile,
+    sendPasswordResetEmail,
 } from "firebase/auth";
 
 const auth = getAuth();
@@ -30,6 +31,17 @@ export function updateUserInfo(currentUser, { displayName, photoURL }) {
                 photoURL: photoURL,
             });
             resolve(result);
+        } catch (ex) {
+            reject(ex);
+        }
+    });
+}
+
+export function passwordResetEmail(email) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let doc = await sendPasswordResetEmail(auth, email);
+            resolve(doc);
         } catch (ex) {
             reject(ex);
         }
