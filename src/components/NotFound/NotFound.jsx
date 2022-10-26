@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate, useRouteError } from "react-router-dom";
-import Button from "../Button/Button.jsx";
+import Button from "../Button/Button";
 
 const NotFound = () => {
     const error = useRouteError();

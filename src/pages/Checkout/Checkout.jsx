@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
-import calcDiscountPrice from "../../utils/calcDiscountPrice.js";
-import Button from "../../components/Button/Button.jsx";
-import { BiLock } from "react-icons/all";
-import AppContext from "../../context/AppContext.jsx";
+import calcDiscountPrice from "../../utils/calcDiscountPrice";
+import Button from "../../components/Button/Button";
+import { BiLock } from "react-icons/bi";
+import AppContext from "../../context/AppContext";
 
 const Checkout = () => {
     const courseDetail = useLoaderData();

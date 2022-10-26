@@ -4,16 +4,16 @@ import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import Courses, { fetchAllCourses } from "./pages/Courses/Courses";
-import CourseDetail, { fetchCourseDetail } from "./pages/CourseDetail/CourseDetail.jsx";
-import AboutPage from "./pages/AboutPage/AboutPage.jsx";
-import LoginPage from "./pages/LoginPage/LoginPage.jsx";
-import RegistrationPage from "./pages/RegistrationPage/RegistrationPage.jsx";
-import BlogPage from "./pages/BlogPage/BlogPage.jsx";
+import CourseDetail, { fetchCourseDetail } from "./pages/CourseDetail/CourseDetail";
+import AboutPage from "./pages/AboutPage/AboutPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
+import BlogPage from "./pages/BlogPage/BlogPage";
 import FAQs from "./pages/FAQs/FAQs";
-import ProfilePage from "./pages/ProfilePage/ProfilePage.jsx";
-import PrivateRoute from "./middleware/PrivateRoute.jsx";
-import Checkout from "./pages/Checkout/Checkout.jsx";
-import NotFound from "./components/NotFound/NotFound.jsx";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import PrivateRoute from "./middleware/PrivateRoute";
+import Checkout from "./pages/Checkout/Checkout";
+import NotFound from "./components/NotFound/NotFound";
 
 const router = createBrowserRouter([
     {

@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import "./homePage.css";
-import Button from "../../components/Button/Button.jsx";
-import AppContext from "../../context/AppContext.jsx";
+import Button from "../../components/Button/Button";
+import AppContext from "../../context/AppContext";
 import Course from "../../components/Course/Course";
 import { Link, useLoaderData } from "react-router-dom";
-import { fetchAllInstructor, fetchCategories } from "../../context/actions.js";
-import Instructor from "../../components/Instructor/Instructor.jsx";
-import HeroSlider from "../../components/HeroSlider/HeroSlider.jsx";
+import { fetchAllInstructor, fetchCategories } from "../../context/actions";
+import Instructor from "../../components/Instructor/Instructor";
+import HeroSlider from "../../components/HeroSlider/HeroSlider";
 
 const HomePage = (props) => {
     const {
@@ -71,9 +71,9 @@ const HomePage = (props) => {
                     <h1 className="section-sub-title">Explore Top Categories</h1>
                     <div className="grid grid-cols-3 mt-10">
                         {categories &&
-                            categories.map((cat) => (
-                                <div className="flex items-start gap-5 p-5">
-                                    <img className="w-10" src="category_1_1.svg" alt="logo" />
+                            categories.map((cat, index) => (
+                                <div className="flex items-start gap-5 p-5" key={index}>
+                                    <img className="w-10" src="/category_1_1.svg" alt="logo" />
                                     <div>
                                         <h4 className="text-2xl text-neutral dark:text-base-300/90 font-medium">
                                             {cat.name}
@@ -210,13 +210,14 @@ const HomePage = (props) => {
                             All
                         </li>
                         {categories &&
-                            categories.map((cat) => (
+                            categories.map((cat, index) => (
                                 <li
+                                    key={index}
                                     onClick={() => handleFilterPopularCourse(cat.id)}
                                     className={`list-none px-4 py-1 text-sm rounded cursor-pointer
-                            text-neutral-900 font-medium whitespace-nowrap rounded-xl border border-neutral/10 dark:border-neutral
-                            ${filterByPopularCourse === cat.id ? "bg-primary-400 text-white" : ""}
-                            `}
+						                            text-neutral-900 font-medium whitespace-nowrap rounded-xl border border-neutral/10 dark:border-neutral
+						                            ${filterByPopularCourse === cat.id ? "bg-primary-400 text-white" : ""}
+						                            `}
                                 >
                                     {cat.name}
                                 </li>
@@ -225,8 +226,8 @@ const HomePage = (props) => {
                     {filterCourses && filterCourses.length > 0 ? (
                         <>
                             <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-                                {filterCourses.map((course) => (
-                                    <Course course={course} />
+                                {filterCourses.map((course, index) => (
+                                    <Course course={course} key={index} />
                                 ))}
                             </div>
                             <Link to="/courses">

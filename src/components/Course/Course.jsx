@@ -1,5 +1,4 @@
 import React from "react";
-// import fullPath from "src/utils/fullPath"
 import { Link } from "react-router-dom";
 import "./course.css";
 import Rating from "../Rating";

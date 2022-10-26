@@ -3,16 +3,39 @@ import { Link, useLoaderData } from "react-router-dom";
 import Rating from "../../components/Rating";
 import { BsCalendarDate, BsGlobe } from "react-icons/bs";
 import { MdSubtitles } from "react-icons/md";
-import api from "../../axios/index.js";
-import Button from "../../components/Button/Button.jsx";
+import api from "../../axios";
+import Button from "../../components/Button/Button";
+import Pdf from "react-to-pdf";
 
 const CourseDetail = (props) => {
     const details = useLoaderData();
 
-    function handleDownloadPdf() {}
+    const ref = React.createRef();
+    const options = {
+        orientation: "landscape",
+        unit: "in",
+        format: [4, 2],
+    };
+
+    function handleDownloadPdf() {
+        //     if (instance.loading) return <div>Loading ...</div>;
+        //
+        //     if (instance.error) return <div>Something went wrong: {error}</div>;
+    }
 
     return (
         <div className="container mt-10">
+            <div>
+                <Pdf targetRef={ref} filename="code-example.pdf">
+                    {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
+                </Pdf>
+
+                <div ref={ref}>
+                    <h1>Hello CodeSandbox</h1>
+                    <h2>Start editing to see some magic happen!</h2>
+                </div>
+            </div>
+
             <div className="grid grid-cols-7">
                 <div className="col-span-3">
                     <img src={details.thumb} className="w-full" />

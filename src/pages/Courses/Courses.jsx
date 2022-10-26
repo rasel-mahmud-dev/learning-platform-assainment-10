@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import AppContext from "../../context/AppContext.jsx";
-import Course from "../../components/Course/Course.jsx";
-import Sidebar from "../../components/Sidebar/Sidebar.jsx";
-import Rating from "../../components/Rating.jsx";
+import AppContext from "../../context/AppContext";
+import Course from "../../components/Course/Course";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import Rating from "../../components/Rating";
 import api from "../../axios/index.js";
 import { useLoaderData } from "react-router-dom";
-import { fetchCategories } from "../../context/actions.js";
+import { fetchCategories } from "../../context/actions";
 
 const Courses = () => {
     const {

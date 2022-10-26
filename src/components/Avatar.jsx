@@ -1,9 +1,10 @@
-import Reafct from "react"
-const Avatar ()=> {
+import React from "react"
+
+const Avatar = ()=> {
   return (
-    <div class="avatar online placeholder">
-  <div class="bg-neutral-focus text-neutral-content rounded-full w-16">
-    <span class="text-xl">JO</span>
+    <div className="avatar online placeholder">
+  <div className="bg-neutral-focus text-neutral-content rounded-full w-16">
+    <span className="text-xl">JO</span>
   </div>
 </div>
 )

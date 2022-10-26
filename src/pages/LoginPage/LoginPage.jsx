@@ -1,11 +1,12 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import Button from "../../components/Button/Button.jsx";
+import Button from "../../components/Button/Button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { BsGithub, BsGoogle, CgLock } from "react-icons/all.js";
+import { BsGithub, BsGoogle } from "react-icons/bs";
+import {  CgLock } from "react-icons/cg";
 import AppContext from "../../context/AppContext.jsx";
-import InputGroup from "../../components/InputGroup/InputGroup.jsx";
-import Modal from "../../components/Modal/Modal.jsx";
+import InputGroup from "../../components/InputGroup/InputGroup";
+import Modal from "../../components/Modal/Modal";
 
 const LoginPage = () => {
     const {
