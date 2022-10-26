@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
-import calcDiscountPrice from "../../components/utils/calcDiscountPrice.js";
+import calcDiscountPrice from "../../utils/calcDiscountPrice.js";
 import Button from "../../components/Button/Button.jsx";
 import { BiLock } from "react-icons/all";
 import AppContext from "../../context/AppContext.jsx";

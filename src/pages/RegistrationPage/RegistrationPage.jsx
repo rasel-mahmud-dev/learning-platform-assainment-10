@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import Button from "../../components/Button/Button.jsx";
+import Button from "../../components/Button/Button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { BsGithub, BsGoogle, CgLock } from "react-icons/all.js";
-import InputGroup from "../../components/InputGroup/InputGroup.jsx";
+import { BsGithub, BsGoogle, CgLock } from "react-icons/all";
+import InputGroup from "../../components/InputGroup/InputGroup";
 
-import AppContext from "../../context/AppContext.jsx";
+import AppContext from "../../context/AppContext";
+
 import { createUserWithEmailAndPassword, getAuth, updateProfile } from "firebase/auth";
 
 const RegistrationPage = (props) => {

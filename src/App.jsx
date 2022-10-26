@@ -1,13 +1,13 @@
 import { useContext, useEffect } from "react";
 import "./App.css";
-import Navigation from "./components/Navigation/Navigation.jsx";
+import Navigation from "./components/Navigation/Navigation";
 import { Outlet } from "react-router-dom";
 
 //initialize firebase app
-import "./firebase/index.js";
+import "./firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import AppContext from "./context/AppContext.jsx";
-import AlertMessage from "./components/AlertMessage.jsx";
+import AppContext from "./context/AppContext";
+import AlertMessage from "./components/AlertMessage";
 
 function App() {
     const {

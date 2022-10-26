@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import AppContext from "../context/AppContext.jsx";
+import AppContext from "../context/AppContext";
 import { Navigate, useLocation } from "react-router-dom";
-import Loader from "../components/Loader.jsx";
+import Loader from "../components/Loader";
 
 const PrivateRoute = (props) => {
     const location = useLocation();

@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./navigation.css";
-import AppContext from "../../context/AppContext.jsx";
+import AppContext from "../../context/AppContext";
 import { BsSunFill, FaMoon, FaSignInAlt } from "react-icons/all";
-import Button from "../Button/Button.jsx";
+import Button from "../Button/Button";
 
 const Navigation = () => {
     const {
@@ -93,7 +93,7 @@ const Navigation = () => {
                     <div className="flex-none">
                         {auth ? (
                             <div
-                                className="relative"
+                                className="relative ml-3"
                                 onMouseOver={() => setOpenAuthMenu(true)}
                                 onMouseLeave={() => setOpenAuthMenu(false)}
                             >
