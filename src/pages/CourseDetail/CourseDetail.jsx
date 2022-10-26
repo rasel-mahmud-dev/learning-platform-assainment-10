@@ -1,9 +1,9 @@
 import React from "react";
-import { fetchAllCourses } from "../Courses/Courses";
 import { useLoaderData } from "react-router-dom";
 import Rating from "../../components/Rating";
 import { BsCalendarDate, BsGlobe } from "react-icons/bs";
 import { MdSubtitles } from "react-icons/md";
+import api from "../../axios/index.js";
 
 const CourseDetail = (props) => {
     const course = useLoaderData();
@@ -45,7 +45,14 @@ const CourseDetail = (props) => {
 };
 
 export function fetchCourseDetail({ params }) {
-    return fetchAllCourses().find((c) => c.id == params.courseId);
+    return api
+        .get("/api/course/" + params.courseId)
+        .then(({ data }) => {
+            return data;
+        })
+        .catch((ex) => {
+            return null;
+        });
 }
 
 export default CourseDetail;

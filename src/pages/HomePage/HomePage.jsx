@@ -10,33 +10,47 @@ import "./style.css";
 import Rating from "../../components/Rating.jsx";
 import Button from "../../components/Button/Button.jsx";
 import AppContext from "../../context/AppContext.jsx";
-import { fetchAllCourses } from "../Courses/Courses.jsx";
 import Course from "../../components/Course/Course";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
+import { fetchCategories } from "../../context/actions.js";
 
 const HomePage = (props) => {
     const {
-        state: { courses },
-        actions: { setCourses },
+        state: { courses, categories },
+        actions: { setCourses, setCategories },
     } = useContext(AppContext);
 
     const [filterByPopularCourse, setFilterByPopularCourse] = useState(0);
 
+    const coursesData = useLoaderData();
+
     useEffect(() => {
-        setCourses(fetchAllCourses());
+        (async function () {
+            // store courses in global state for caching
+            setCourses(coursesData);
+
+            // store categories in global state for caching
+            if (!categories) {
+                fetchCategories()
+                    .then((result) => {
+                        setCategories(result);
+                    })
+                    .catch((ex) => {});
+            }
+        })();
     }, []);
 
-    const categories = [
-        { id: 1, name: "Web development" },
-        { id: 2, name: "App development" },
-        { id: 7, name: "Mechine Learning" },
-        { id: 12, name: "Cyber Security" },
-        { id: 21, name: "Ethical Hacking" },
-        { id: 3, name: "Graphich design" },
-        { id: 4, name: "Learning English" },
-        { id: 5, name: "Video Editing" },
-        { id: 6, name: "Logo Design" },
-    ];
+    // const categories = [
+    //     { id: 1, name: "Web development" },
+    //     { id: 2, name: "App development" },
+    //     { id: 7, name: "Mechine Learning" },
+    //     { id: 12, name: "Cyber Security" },
+    //     { id: 21, name: "Ethical Hacking" },
+    //     { id: 3, name: "Graphich design" },
+    //     { id: 4, name: "Learning English" },
+    //     { id: 5, name: "Video Editing" },
+    //     { id: 6, name: "Logo Design" },
+    // ];
 
     function handleFilterPopularCourse(courseId) {
         setFilterByPopularCourse(courseId);
@@ -75,18 +89,19 @@ const HomePage = (props) => {
                     <h4 className="section-title">OUR COURSE CATEGORIES</h4>
                     <h1 className="text-3xl text-neutral font-bold text-center">Explore Top Categories</h1>
                     <div className="grid grid-cols-3 mt-10">
-                        {categories.map((cat) => (
-                            <div className="flex items-start gap-5 p-5">
-                                <img className="w-10" src="category_1_1.svg" alt="logo" />
-                                <div>
-                                    <h4 className="text-2xl text-neutral font-medium">{cat.name}</h4>
-                                    <p className="text-neutral/60">
-                                        Globally maintain magnetic process with model foster data after ubiuitous
-                                        architectures.
-                                    </p>
+                        {categories &&
+                            categories.map((cat) => (
+                                <div className="flex items-start gap-5 p-5">
+                                    <img className="w-10" src="category_1_1.svg" alt="logo" />
+                                    <div>
+                                        <h4 className="text-2xl text-neutral font-medium">{cat.name}</h4>
+                                        <p className="text-neutral/60">
+                                            Globally maintain magnetic process with model foster data after ubiuitous
+                                            architectures.
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
                     </div>
                 </div>
             </section>
@@ -190,17 +205,18 @@ const HomePage = (props) => {
                         optimize low-risk high-yield metrics and plug-and-play potentialities.
                     </p>
                     <div className="mt-10 !max-w-5xl mx-auto flex flex-wrap items-center justify-center gap-3">
-                        {categories.map((cat) => (
-                            <li
-                                onClick={() => handleFilterPopularCourse(cat.id)}
-                                className={`list-none px-4 py-1 text-sm rounded cursor-pointer
+                        {categories &&
+                            categories.map((cat) => (
+                                <li
+                                    onClick={() => handleFilterPopularCourse(cat.id)}
+                                    className={`list-none px-4 py-1 text-sm rounded cursor-pointer
                             text-neutral-900 font-medium whitespace-nowrap rounded-xl border border-neutral/10
                             ${filterByPopularCourse === cat.id ? "bg-primary-400 text-white" : ""}
                             `}
-                            >
-                                {cat.name}
-                            </li>
-                        ))}
+                                >
+                                    {cat.name}
+                                </li>
+                            ))}
                     </div>
                     {courses && (
                         <>

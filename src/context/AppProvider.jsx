@@ -5,6 +5,7 @@ import { loginViaEmailAndPassword, loginWithGithub, loginWithGoogle, logOutHandl
 const AppProvider = (props) => {
     const [state, setState] = useState({
         courses: [],
+        categories: null,
         auth: null,
         setAuthLoaded: false,
         message: {
@@ -17,6 +18,7 @@ const AppProvider = (props) => {
         state,
         actions: {
             setCourses: (v) => setState((prev) => ({ ...prev, courses: v })),
+            setCategories: (v) => setState((prev) => ({ ...prev, categories: v })),
             setAuth: (user) => setState((prev) => ({ ...prev, auth: user })),
             setAuthLoaded: (isLoaded) => setState((prev) => ({ ...prev, isAuthLoaded: isLoaded })),
             setMessage: (message) => setState((prev) => ({ ...prev, message: { ...message } })),

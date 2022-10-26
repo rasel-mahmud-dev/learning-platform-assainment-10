@@ -3,32 +3,43 @@ import AppContext from "../../context/AppContext.jsx";
 import Course from "../../components/Course/Course.jsx";
 import Sidebar from "../../components/Sidebar/Sidebar.jsx";
 import Rating from "../../components/Rating.jsx";
+import api from "../../axios/index.js";
+import { useLoaderData } from "react-router-dom";
+import { fetchCategories } from "../../context/actions.js";
 
 const Courses = () => {
-    const { state, setCourses } = useContext(AppContext);
+    const {
+        state: { categories, courses },
+        actions: { setCourses, setCategories },
+    } = useContext(AppContext);
+
     const [isOpenSidebar, setOpenSidebar] = useState(true);
+
+    let coursesData = useLoaderData();
+
+    useEffect(() => {
+        (async function () {
+            // store courses in global state for caching
+            setCourses(coursesData);
+
+            // store categories in global state for caching
+            if (!categories) {
+                fetchCategories()
+                    .then((result) => {
+                        setCategories(result);
+                    })
+                    .catch((ex) => {});
+            }
+        })();
+    }, []);
+
     const [filter, setFilter] = useState({
         category: [],
         ratings: [],
-        languange: "",
+        language: "",
         priceRange: [0, 100],
         duration: 100,
     });
-    const categories = [
-        { id: 1, name: "Web development" },
-        { id: 2, name: "App development" },
-        { id: 7, name: "Mechine Learning" },
-        { id: 12, name: "Cyber Security" },
-        { id: 21, name: "Ethical Hacking" },
-        { id: 3, name: "Graphich design" },
-        { id: 4, name: "Learning English" },
-        { id: 5, name: "Video Editing" },
-        { id: 6, name: "Logo Design" },
-    ];
-
-    useEffect(() => {
-        setCourses(fetchAllCourses());
-    }, []);
 
     function filterByCategoryHandler(category) {
         let updateFilter = [...filter.category];
@@ -38,7 +49,7 @@ const Courses = () => {
         } else {
             updateFilter.push(category);
         }
-        // alert(JSON.stringify(updateFilter))
+
         setFilter((prev) => ({
             ...prev,
             category: updateFilter,
@@ -65,20 +76,21 @@ const Courses = () => {
                             ""
                         )}
                         <div className="mt-1">
-                            {categories.map((category) => (
-                                <div className="text-base-700 flex items-center gap-x-2 cursor-pointer">
-                                    <input
-                                        onChange={() => filterByCategoryHandler(category)}
-                                        type="checkbox"
-                                        id={category.name}
-                                        className="checkbox !rounded checkbox-xs checkbox-primary "
-                                        checked={!!filter.category.find((cat) => cat.id === category.id)}
-                                    />
-                                    <label htmlFor={category.name} className="py-1 font-medium">
-                                        {category.name}
-                                    </label>
-                                </div>
-                            ))}
+                            {categories &&
+                                categories.map((category) => (
+                                    <div className="text-base-700 flex items-center gap-x-2 cursor-pointer">
+                                        <input
+                                            onChange={() => filterByCategoryHandler(category)}
+                                            type="checkbox"
+                                            id={category.name}
+                                            className="checkbox !rounded checkbox-xs checkbox-primary "
+                                            checked={!!filter.category.find((cat) => cat.id === category.id)}
+                                        />
+                                        <label htmlFor={category.name} className="py-1 font-medium">
+                                            {category.name}
+                                        </label>
+                                    </div>
+                                ))}
                         </div>
 
                         <h1 className="font-bold text-lg text-base-500 mt-3">Rating</h1>
@@ -108,9 +120,7 @@ const Courses = () => {
                     <div className="ml-4">
                         <h1 className="text-xl font-bold mt-4 mb-3">Courses </h1>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-                            {state?.courses.map((course) => (
-                                <Course course={course} key={course.id} />
-                            ))}
+                            {courses && courses?.map((course) => <Course course={course} key={course.id} />)}
                         </div>
                     </div>
                 </div>
@@ -121,90 +131,12 @@ const Courses = () => {
 export default Courses;
 
 export function fetchAllCourses() {
-    return [
-        {
-            title: "Full stack web development",
-            id: 1,
-            thumb: "/images-2.jpeg",
-            description:
-                "Dummy course content best for mern stack web developing course. best online course out main aim to give student best knowledge ",
-        },
-        {
-            title: "Full stack web development",
-            id: 2,
-            thumb: "/images.jpeg",
-            description:
-                "Dummy course content best for mern stack web developing course. best online course out main aim to give student best knowledge",
-        },
-        {
-            title: "Full stack web development",
-            id: 3,
-            thumb: "/images-2.jpeg",
-            description:
-                "Dummy course content best for mern stack web developing course. best online course out main aim to give student best knowledge",
-        },
-        {
-            title: "Full stack web development",
-            id: 4,
-            thumb: "/images.jpeg",
-            description:
-                "Dummy course content best for mern stack web developing course. best online course out main aim to give student best knowledge",
-        },
-        {
-            title: "Full stack web development",
-            id: 5,
-            thumb: "/images-2.jpeg",
-            description:
-                "Dummy course content best for mern stack web developing course. best online course out main aim to give student best knowledge",
-        },
-        {
-            title: "Full stack web development",
-            id: 6,
-            thumb: "/images.jpeg",
-            description:
-                "Dummy course content best for mern stack web developing course. best online course out main aim to give student best knowledge",
-        },
-        {
-            title: "Full stack web development",
-            id: 7,
-            thumb: "/images-2.jpeg",
-            description:
-                "Dummy course content best for mern stack web developing course. best online course out main aim to give student best knowledge",
-        },
-        {
-            title: "Full stack web development",
-            id: 8,
-            thumb: "/images-2.jpeg",
-            description:
-                "Dummy course content best for mern stack web developing course. best online course out main aim to give student best knowledge",
-        },
-        {
-            title: "Full stack web development",
-            id: 9,
-            thumb: "/images.jpeg",
-            description:
-                "Dummy course content best for mern stack web developing course. best online course out main aim to give student best knowledge",
-        },
-        {
-            title: "Full stack web development",
-            id: 10,
-            thumb: "/images-2.jpeg",
-            description:
-                "Dummy course content best for mern stack web developing course. best online course out main aim to give student best knowledge",
-        },
-        {
-            title: "Full stack web development",
-            id: 11,
-            thumb: "/images.jpeg",
-            description:
-                "Dummy course content best for mern stack web developing course. best online course out main aim to give student best knowledge",
-        },
-        {
-            title: "Full stack web development",
-            id: 12,
-            thumb: "/images-2.jpeg",
-            description:
-                "DDummy course content best for mern stack web developing course. best online course out main aim to give student best knowledge",
-        },
-    ];
+    return api
+        .get("/api/courses")
+        .then(({ data, status }) => {
+            return data;
+        })
+        .catch((ex) => {
+            return null;
+        });
 }
