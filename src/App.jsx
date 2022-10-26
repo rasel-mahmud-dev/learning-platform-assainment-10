@@ -12,7 +12,7 @@ import AlertMessage from "./components/AlertMessage.jsx";
 function App() {
     const {
         state,
-        actions: { setAuth, setMessage },
+        actions: { setAuth, setAuthLoaded, setMessage },
     } = useContext(AppContext);
 
     const auth = getAuth();
@@ -27,9 +27,11 @@ function App() {
                     userId: user.uid,
                     photoURL: user.photoURL,
                 });
+                setAuthLoaded(true);
             } else {
                 // User is signed out
                 console.log("User signed out");
+                setAuthLoaded(true);
                 setAuth(null);
             }
         });
