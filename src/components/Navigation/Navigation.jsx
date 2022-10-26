@@ -86,6 +86,9 @@ const Navigation = () => {
                                     }`}
                                 >
                                     <li className="pt-1">{auth.displayName}</li>
+                                    <li className="pt-1">
+                                        <Link to={`/profile/${auth.uId}`}>Profile</Link>
+                                    </li>
                                     <li className="pt-1 link cursor-pointer" onClick={handleLogOut}>
                                         Logout
                                     </li>
