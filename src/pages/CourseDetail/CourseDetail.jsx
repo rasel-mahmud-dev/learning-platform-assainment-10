@@ -7,20 +7,21 @@ import api from "../../axios/index.js";
 import Button from "../../components/Button/Button.jsx";
 
 const CourseDetail = (props) => {
-    const { course, details } = useLoaderData();
+    const details = useLoaderData();
+
     console.log(details);
 
     return (
         <div className="container mt-10">
             <div className="grid grid-cols-7">
                 <div className="col-span-3">
-                    <img src={course.thumb} className="w-full" />
+                    <img src={details.thumb} className="w-full" />
                 </div>
                 <div className="col-span-4 pl-5">
-                    <h1 className="font-bold text-3xl">{course.title}</h1>
-                    <p>{course.description}</p>
+                    <h1 className="font-bold text-3xl">{details.title}</h1>
+                    <p>{details.description}</p>
                     <div className="flex items-center gap-x-2 mt-2">
-                        <Rating rate={details?.rating?.rate} id={course.id} />
+                        <Rating rate={details?.rating?.rate} id={details.id} />
                         <span className="text-sm font-bold text-orange-400">{details?.rating?.rate}</span>
                         <span className="text-sm">({details?.rating?.total}) Ratings</span>
                     </div>
@@ -45,7 +46,7 @@ const CourseDetail = (props) => {
                     </div>
 
                     <div className="mt-6">
-                        <Link to={`/checkout/${course.id}`}>
+                        <Link to={`/checkout/${details.id}`}>
                             <Button className="bg-primary-400">Buy Now</Button>
                         </Link>
                     </div>

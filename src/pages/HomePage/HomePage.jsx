@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 
-import "./style.css";
+import "./homePage.css";
 import Rating from "../../components/Rating.jsx";
 import Button from "../../components/Button/Button.jsx";
 import AppContext from "../../context/AppContext.jsx";

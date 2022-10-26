@@ -12,3 +12,6 @@
 .login-card{
     @apply bg-primary-5 dark:bg-primary-5 dark:text-base-200 !shadow-xl;
 }
+.active.btn {
+    @apply !text-primary-500
+}

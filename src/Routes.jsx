@@ -29,6 +29,7 @@ const router = createBrowserRouter([
             { path: "/login", element: <LoginPage /> },
             {
                 path: "/checkout/:courseId",
+                loader: fetchCourseDetail,
                 element: (
                     <PrivateRoute>
                         <Checkout />

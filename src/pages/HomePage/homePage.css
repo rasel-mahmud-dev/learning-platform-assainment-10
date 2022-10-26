@@ -6,6 +6,7 @@
 .home-page section:nth-child(2),
 .home-page section:nth-child(4),
 .home-page section:nth-child(6){
-    background: #f8f8ff;
+    /*background: #f8f8ff;*/
+    @apply dark:bg-dark-5 bg-primary-5
 }
 

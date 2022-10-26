@@ -15,7 +15,7 @@
 body {
   margin: 0;
   place-items: center;
-    @apply bg-primary-5 dark:bg-dark-5 dark:text-base-200;
+    @apply bg-primary-5 dark:bg-dark-10 dark:text-base-200;
     min-height: 100vh;
 
 }
