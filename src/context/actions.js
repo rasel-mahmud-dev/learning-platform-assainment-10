@@ -10,3 +10,14 @@ export function fetchCategories() {
             return null;
         });
 }
+
+export function fetchAllInstructor() {
+    return api
+        .get("/api/instructors")
+        .then(({ data, status }) => {
+            return data;
+        })
+        .catch((ex) => {
+            return null;
+        });
+}

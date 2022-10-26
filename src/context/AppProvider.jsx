@@ -6,6 +6,7 @@ const AppProvider = (props) => {
     const [state, setState] = useState({
         courses: [],
         categories: null,
+        instructors: null,
         auth: null,
         setAuthLoaded: false,
         message: {
@@ -17,11 +18,13 @@ const AppProvider = (props) => {
     const value = {
         state,
         actions: {
-            setCourses: (v) => setState((prev) => ({ ...prev, courses: v })),
-            setCategories: (v) => setState((prev) => ({ ...prev, categories: v })),
+            setCourses: (courses) => setState((prev) => ({ ...prev, courses })),
+            setCategories: (categories) => setState((prev) => ({ ...prev, categories })),
+            setInstructors: (instructors) => setState((prev) => ({ ...prev, instructors })),
             setAuth: (user) => setState((prev) => ({ ...prev, auth: user })),
             setAuthLoaded: (isLoaded) => setState((prev) => ({ ...prev, isAuthLoaded: isLoaded })),
             setMessage: (message) => setState((prev) => ({ ...prev, message: { ...message } })),
+
             loginViaEmailAndPassword,
             loginWithGoogle,
             loginWithGithub,

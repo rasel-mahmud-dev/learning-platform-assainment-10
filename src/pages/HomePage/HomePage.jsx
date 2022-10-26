@@ -12,12 +12,12 @@ import Button from "../../components/Button/Button.jsx";
 import AppContext from "../../context/AppContext.jsx";
 import Course from "../../components/Course/Course";
 import { Link, useLoaderData } from "react-router-dom";
-import { fetchCategories } from "../../context/actions.js";
+import { fetchAllInstructor, fetchCategories } from "../../context/actions.js";
 
 const HomePage = (props) => {
     const {
-        state: { courses, categories },
-        actions: { setCourses, setCategories },
+        state: { courses, categories, instructors },
+        actions: { setCourses, setCategories, setInstructors },
     } = useContext(AppContext);
 
     const [filterByPopularCourse, setFilterByPopularCourse] = useState(0);
@@ -29,11 +29,21 @@ const HomePage = (props) => {
             // store courses in global state for caching
             setCourses(coursesData);
 
-            // store categories in global state for caching
+            // don't re call api if already fetched categories
             if (!categories) {
                 fetchCategories()
                     .then((result) => {
+                        // store categories in global state for caching
                         setCategories(result);
+                    })
+                    .catch((ex) => {});
+            }
+
+            // store instructors in global state for caching
+            if (!instructors) {
+                fetchAllInstructor()
+                    .then((result) => {
+                        setInstructors(result);
                     })
                     .catch((ex) => {});
             }
@@ -244,18 +254,23 @@ const HomePage = (props) => {
                         service depend lifestyle carefully
                     </p>
                     <div className="mt-10 grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
-                        {new Array(10).fill(1).map((_, index) => (
-                            <div className="card rounded-md shadow bg-base-100">
-                                <img className="w-full" src="/mosh_channels4_profile.jpg" alt="" />
-                                <div className="p-4">
-                                    <h4 className="text-base font-medium mb-1">Mosh Hamedani</h4>
-                                    <div className="flex items-center gap-x-2">
-                                        <Rating rate={5} id="d" /> <span className="text-sm font-bold">(5233)</span>
+                        {instructors &&
+                            instructors.map((instructor, index) => (
+                                <div className="card rounded-md shadow bg-base-100">
+                                    <img className="w-full" src={instructor.avatar} alt="" />
+                                    <div className="p-4">
+                                        <h4 className="text-base font-medium mb-1">{instructor.name}</h4>
+                                        <div className="flex items-center gap-x-2">
+                                            <Rating rate={instructor.rating.rate} id="d" />{" "}
+                                            <span className="text-sm font-bold">({instructor.rating.count})</span>
+                                        </div>
+                                        <span className="text-sm font-bold mt-1">
+                                            {" "}
+                                            Total Courses {instructor.totalCourses}
+                                        </span>
                                     </div>
-                                    <span className="text-sm font-bold mt-1"> Total Courses 50</span>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
                     </div>
                     <Button className="bg-primary-400 block mx-auto mt-5">Show All Instructor</Button>
                 </div>
