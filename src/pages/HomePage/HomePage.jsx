@@ -1,11 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
-
 import "./homePage.css";
 import Button from "../../components/Button/Button.jsx";
 import AppContext from "../../context/AppContext.jsx";
@@ -13,6 +7,7 @@ import Course from "../../components/Course/Course";
 import { Link, useLoaderData } from "react-router-dom";
 import { fetchAllInstructor, fetchCategories } from "../../context/actions.js";
 import Instructor from "../../components/Instructor/Instructor.jsx";
+import HeroSlider from "../../components/HeroSlider/HeroSlider.jsx";
 
 const HomePage = (props) => {
     const {
@@ -21,6 +16,7 @@ const HomePage = (props) => {
     } = useContext(AppContext);
 
     const [filterByPopularCourse, setFilterByPopularCourse] = useState(0);
+    const [filterCourses, setFilterCourses] = useState([]);
 
     const coursesData = useLoaderData();
 
@@ -28,6 +24,8 @@ const HomePage = (props) => {
         (async function () {
             // store courses in global state for caching
             setCourses(coursesData);
+            setFilterCourses(coursesData);
+            setFilterByPopularCourse(0);
 
             // don't re call api if already fetched categories
             if (!categories) {
@@ -50,48 +48,20 @@ const HomePage = (props) => {
         })();
     }, []);
 
-    // const categories = [
-    //     { id: 1, name: "Web development" },
-    //     { id: 2, name: "App development" },
-    //     { id: 7, name: "Mechine Learning" },
-    //     { id: 12, name: "Cyber Security" },
-    //     { id: 21, name: "Ethical Hacking" },
-    //     { id: 3, name: "Graphich design" },
-    //     { id: 4, name: "Learning English" },
-    //     { id: 5, name: "Video Editing" },
-    //     { id: 6, name: "Logo Design" },
-    // ];
-
     function handleFilterPopularCourse(courseId) {
+        if (courseId === 0) {
+            setFilterCourses(courses);
+        } else {
+            let filtered = courses.filter((course) => course.categoryId === courseId);
+            setFilterCourses(filtered);
+        }
         setFilterByPopularCourse(courseId);
     }
 
     return (
         <div className="home-page">
             <section className="hero-section !p-0">
-                <Swiper
-                    slidesPerView={1}
-                    onSlideChange={() => console.log("slide change")}
-                    onSwiper={(swiper) => console.log(swiper)}
-                >
-                    <SwiperSlide>
-                        <div>
-                            <img className="w-full" src="/8801001_8572.jpg" alt="" />
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        {" "}
-                        <div>
-                            <img src="/8801001_8572.jpg" alt="" />
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        {" "}
-                        <div>
-                            <img src="/8801001_8572.jpg" alt="" />
-                        </div>
-                    </SwiperSlide>
-                </Swiper>
+                <HeroSlider />
             </section>
 
             {/******** Explore Top Categories *********/}
@@ -230,6 +200,15 @@ const HomePage = (props) => {
                         optimize low-risk high-yield metrics and plug-and-play potentialities.
                     </p>
                     <div className="mt-10 !max-w-5xl mx-auto flex flex-wrap items-center justify-center gap-3">
+                        <li
+                            onClick={() => handleFilterPopularCourse(0)}
+                            className={`list-none px-4 py-1 text-sm rounded cursor-pointer
+                            text-neutral-900 font-medium whitespace-nowrap rounded-xl border border-neutral/10 dark:border-neutral
+                            ${filterByPopularCourse === 0 ? "bg-primary-400 text-white" : ""}
+                            `}
+                        >
+                            All
+                        </li>
                         {categories &&
                             categories.map((cat) => (
                                 <li
@@ -243,10 +222,10 @@ const HomePage = (props) => {
                                 </li>
                             ))}
                     </div>
-                    {courses && (
+                    {filterCourses && filterCourses.length > 0 ? (
                         <>
                             <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-                                {courses.map((course) => (
+                                {filterCourses.map((course) => (
                                     <Course course={course} />
                                 ))}
                             </div>
@@ -254,6 +233,12 @@ const HomePage = (props) => {
                                 <Button className="bg-primary-400 block mx-auto mt-5">View more courses</Button>
                             </Link>
                         </>
+                    ) : (
+                        <div className="mt-10">
+                            <p className="text-red-400 text-xl text-center font-semibold">
+                                No course found on this category
+                            </p>
+                        </div>
                     )}
                 </div>
             </section>
