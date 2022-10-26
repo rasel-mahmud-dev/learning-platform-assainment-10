@@ -1,42 +1,41 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import Rating from "../../components/Rating";
 import { BsCalendarDate, BsGlobe } from "react-icons/bs";
 import { MdSubtitles } from "react-icons/md";
 import api from "../../axios";
 import Button from "../../components/Button/Button";
-import Pdf from "react-to-pdf";
+import ReactToPdf from "react-to-pdf";
+import GeneratePDF from "../../components/GeneratePDF/GeneratePDF";
 
 const CourseDetail = (props) => {
     const details = useLoaderData();
+	
+	const [downloadPdf, setDownloadPdf]  = useState(false)
 
     const ref = React.createRef();
-    const options = {
-        orientation: "landscape",
-        unit: "in",
-        format: [4, 2],
-    };
+    const timeOutId = React.createRef();
 
     function handleDownloadPdf() {
-        //     if (instance.loading) return <div>Loading ...</div>;
-        //
-        //     if (instance.error) return <div>Something went wrong: {error}</div>;
+		// prevent multiple download before 1s
+	    timeOutId.current && clearTimeout(timeOutId.current);
+	    setDownloadPdf(true)
+
+	    // after click 1 second download button download will be start
+	    timeOutId.current = setTimeout(()=>{
+			let downloadPdf = document.getElementById("downloadPdf");
+			downloadPdf.click();
+			setDownloadPdf(false)
+		}, 1000)
+	   
     }
 
     return (
-        <div className="container mt-10">
-            <div>
-                <Pdf targetRef={ref} filename="code-example.pdf">
-                    {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
-                </Pdf>
-
-                <div ref={ref}>
-                    <h1>Hello CodeSandbox</h1>
-                    <h2>Start editing to see some magic happen!</h2>
-                </div>
-            </div>
-
-            <div className="grid grid-cols-7">
+        <div className="container">
+	        
+	        {downloadPdf && <GeneratePDF className="fixed top-full" id="pdf-frame" ref={ref} details={details} /> }
+	        
+            <div className="grid grid-cols-7 mt-8">
                 <div className="col-span-3">
                     <img src={details.thumb} className="w-full" />
                 </div>
@@ -104,3 +103,5 @@ export function fetchCourseDetail({ params }) {
 }
 
 export default CourseDetail;
+
+
