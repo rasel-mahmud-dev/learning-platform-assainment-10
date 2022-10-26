@@ -4,6 +4,7 @@ import Button from "../../components/Button/Button.jsx";
 import { Link } from "react-router-dom";
 import { BsGithub, BsGoogle, CgLock } from "react-icons/all.js";
 import AppContext from "../../context/AppContext.jsx";
+import InputGroup from "../../components/InputGroup/InputGroup.jsx";
 
 const LoginPage = (props) => {
     const {
@@ -14,76 +15,60 @@ const LoginPage = (props) => {
     const {
         register,
         handleSubmit,
-        setError,
         formState: { errors },
     } = useForm();
 
-    const [formError, setFormError] = useState("");
-
     const onSubmit = (data) => {
-        let errorMessage = "";
-        for (let errorsKey in errors) {
-            if (errors[errorsKey]) {
-                if (errors[errorsKey].type === "pattern") {
-                    errorMessage =
-                        errorsKey +
-                        ` should be Minimum six characters, at least one uppercase, one
-		                    lowercase and one number`;
-                }
-            }
+        if (Object.keys(errors).length === 0) {
+            loginViaEmailAndPassword(data.email, data.password)
+                .then((result) => {
+                    console.log(result);
+                })
+                .catch((error) => {
+                    setMessage({
+                        text: error.message ? error.message : "Login fail, Please try again",
+                        status: 500,
+                    });
+                });
         }
-
-        setError("password", { type: "minLength", message: "errorMessage" }, { shouldFocus: true });
-
-        // if (errorMessage) {
-        //
-        //     return;
-        // }
-
-        // loginViaEmailAndPassword(data.email, data.password);
     };
-
-    console.log(errors);
 
     return (
         <div>
-            <div className="shadow-lg bg-base-100 rounded-box max-w-md mx-auto m-10 px-5 py-10">
+            <div className="shadow-around bg-base-100 rounded-box max-w-md mx-auto m-10 px-5 py-10">
                 <h1 className="text-2xl font-bold text-center">Welcome to E-Coaching</h1>
-                <h1 className="text-lg font-bold text-center my-5">Login your account</h1>
+                <h3 className="text-lg font-bold text-center my-5">Login your account</h3>
+
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div>
-                        <label htmlFor="email" className="font-medium mb-1 inline-block">
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            id="email"
-                            {...register("email", { required: true })}
-                            placeholder="Your email"
-                            className="input input-bordered input-primary w-full"
-                        />
-                    </div>
-                    <div className="mt-4">
-                        <label htmlFor="password" className="font-medium mb-1 inline-block">
-                            Password
-                        </label>
-                        <input
-                            id="password"
-                            type="password"
-                            {...register("password", {
-                                required: true,
-                                minLength: 6,
-                                pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
-                            })}
-                            placeholder="Your password"
-                            className="input input-bordered input-primary w-full"
-                        />
-                    </div>
+                    <InputGroup
+                        name="email"
+                        errors={errors}
+                        placeholder="Enter email"
+                        label="Email"
+                        type="email"
+                        register={register("email", { required: "Email required" })}
+                    />
 
-                    {/* errors will return when field validation fails  */}
-                    {formError && <span>{formError}</span>}
+                    <InputGroup
+                        name="password"
+                        errors={errors}
+                        label="Password"
+                        type="password"
+                        register={register("password", {
+                            required: "Password required",
+                            minLength: { value: 6, message: "Password should be min 6 chracter" },
+                            pattern: {
+                                value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/,
+                                message:
+                                    "Password should be contains " +
+                                    "one uppercase and one lowercase and " +
+                                    "a number",
+                            },
+                        })}
+                        placeholder="Your password"
+                    />
 
-                    <div className="mt-4">
+                    <div className="mt-4 text-sm">
                         Forget Password?
                         <Link
                             to="/reset-password"
@@ -94,7 +79,7 @@ const LoginPage = (props) => {
                         </Link>
                     </div>
 
-                    <Button className="bg-primary-400 mt-3 w-full" type="submit">
+                    <Button className="bg-primary-400 w-full mt-6" type="submit">
                         Login
                     </Button>
 
@@ -125,7 +110,7 @@ const LoginPage = (props) => {
                         <Button className="bg-blue-500 justify-center items-center flex w-full px-4 py-2 border-none text-white font-semibold text-sm rounded-md mt-2">
                             <Link to={`/registration`} className="flex items-center">
                                 <CgLock className="mr-2 text-md" />
-                                With Email & Password
+                                Create Account
                             </Link>
                         </Button>
                     </div>

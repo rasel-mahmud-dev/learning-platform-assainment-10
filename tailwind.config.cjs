@@ -18,7 +18,10 @@ module.exports = {
 				600: "#0e5ef8",
 				700: "#085cfc"
 			}
-		}
+		},
+	    boxShadow: {
+			"around": "0 1px 18px 0px #9da6c95e"
+	    }
     },
   },
 	daisyui: {

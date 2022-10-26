@@ -23,6 +23,9 @@ const Navigation = () => {
     }
 
     function chooseFirstLetter(name) {
+        if (!name) {
+            return "";
+        }
         let letterOne = name[0];
         let letterTwo = "";
         let splitName = name.split(" ");
@@ -78,7 +81,7 @@ const Navigation = () => {
                                 </label>
                                 <ul
                                     tabIndex={0}
-                                    className={`absolute opacity-0 invisible top-8 -right-3 mt-3 p-4 shadow-xl bg-base-100 rounded-box w-52 ${
+                                    className={`absolute opacity-0 invisible top-8 -right-3 mt-3 p-4 shadow-around bg-base-100 rounded-box w-52 ${
                                         openAuthMenu ? "!opacity-100 !visible" : ""
                                     }`}
                                 >

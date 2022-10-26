@@ -1,10 +1,12 @@
 import {
+    createUserWithEmailAndPassword,
     getAuth,
     GithubAuthProvider,
     GoogleAuthProvider,
     signInWithEmailAndPassword,
     signInWithPopup,
     signOut,
+    updateProfile,
 } from "firebase/auth";
 
 const auth = getAuth();
@@ -13,6 +15,21 @@ export function loginViaEmailAndPassword(email, password) {
     return new Promise(async (resolve, reject) => {
         try {
             const result = await signInWithEmailAndPassword(auth, email, password);
+            resolve(result);
+        } catch (ex) {
+            reject(ex);
+        }
+    });
+}
+
+export function updateUserInfo(currentUser, { displayName, photoURL }) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const result = await updateProfile(currentUser, {
+                displayName: displayName,
+                photoURL: photoURL,
+            });
+            resolve(result);
         } catch (ex) {
             reject(ex);
         }
