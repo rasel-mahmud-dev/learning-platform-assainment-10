@@ -61,7 +61,7 @@ const Courses = () => {
     }
 
     return (
-        <div className="container">
+        <div className="container !px-0">
             <div className="">
                 <Sidebar isOpen={isOpenSidebar} onClose={() => setOpenSidebar(!isOpenSidebar)}>
                     <div className="p-5">

@@ -10,12 +10,12 @@
      /*background: rgba(0,0,0,0.816);*/
     left: 0;
     top: 0;
-    z-index: 100;
+    z-index: 38;
 }
 
 .sidebar {
-    @apply bg-primary-10;
-    z-index: 101;
+    @apply bg-primary-4 dark:bg-primary-10;
+    z-index: 39;
     width: var(--sidebar-width);
     height: calc(100vh - 70px);
     position: fixed;

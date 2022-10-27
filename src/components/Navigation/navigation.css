@@ -1,21 +1,18 @@
-
+.navbar{
+    z-index: 1000;
+}
 
 .main-nav{
     transition: all .3s ease;
     transform-origin: top;
 }
-.main-nav.mobile{
-    top: 62px;
-    background: #182136;
-    transform: scaleY(0);
-    opacity: 0;
 
-    @apply flex-col absolute w-full left-0;
-}
 
 .main-nav.expand{
     transform: scaleY(1);
     opacity: 1;
+    z-index: 200!important;
+    background: white;
 }
 
 @media screen and (max-width: 640px){
@@ -24,7 +21,7 @@
         background: white;
         opacity: 0;
         transform: scaleY(0);
-        @apply flex-col absolute w-full left-0 shadow-xl;
+        @apply flex-col fixed w-full left-0 shadow-xl;
     }
     .dark .main-nav {
         background: hsl(219 14% 22%);

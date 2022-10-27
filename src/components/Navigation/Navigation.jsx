@@ -59,7 +59,7 @@ const Navigation = () => {
 
     return (
         <div>
-            <div className="navbar z-40 dark:bg-neutral-focus bg-base-100 top-0 left-0 fixed shadow-md">
+            <div className="navbar dark:bg-neutral-focus bg-base-100 top-0 left-0 fixed shadow-md">
                 <div className="container">
                     <div className="flex-1">
                         <Link to="/" className="">
@@ -67,16 +67,16 @@ const Navigation = () => {
                         </Link>
                     </div>
                     <div className={`flex items-center dark:text-white main-nav ${expandNavigation ? "expand" : ""}`}>
-                        <NavLink to="/" className="btn btn-ghost normal-case text-md">
+                        <NavLink onClick={()=>setExpandNavigation(false)} to="/" className="btn btn-ghost normal-case text-md">
                             Home
                         </NavLink>
-                        <NavLink to="/courses" className="btn btn-ghost normal-case text-md">
+                        <NavLink onClick={()=>setExpandNavigation(false)} to="/courses" className="btn btn-ghost normal-case text-md">
                             Courses
                         </NavLink>
-                        <NavLink to="/blogs" className="btn btn-ghost normal-case text-md">
+                        <NavLink onClick={()=>setExpandNavigation(false)} to="/blogs" className="btn btn-ghost normal-case text-md">
                             Blogs
                         </NavLink>
-                        <NavLink to="/faq" className="btn btn-ghost normal-case text-md pr-2">
+                        <NavLink onClick={()=>setExpandNavigation(false)} to="/faq" className="btn btn-ghost normal-case text-md pr-2">
                             FAQs
                         </NavLink>
                     </div>

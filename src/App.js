@@ -9,6 +9,7 @@ import {Outlet} from "react-router-dom";
 import {getAuth, onAuthStateChanged} from "firebase/auth";
 import AppContext from "./context/AppContext";
 import AlertMessage from "./components/AlertMessage";
+import Footer from "./components/Footer/Footer";
 
 function App() {
 	const {
@@ -52,9 +53,10 @@ function App() {
 	
 	return (
 			<div className="App">
-            <Navigation/>
-            <AlertMessage setMessage={setMessage} message={state.message}/>
-            <Outlet/>
+	            <Navigation/>
+	            <AlertMessage setMessage={setMessage} message={state.message}/>
+	            <Outlet/>
+				<Footer />
         </div>
 	);
 }

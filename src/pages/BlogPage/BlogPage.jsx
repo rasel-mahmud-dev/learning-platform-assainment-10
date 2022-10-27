@@ -14,10 +14,10 @@ const BlogPage = () => {
 
     return (
         <div className="container">
-            <h1 className="text-4xl font-bold text-center mt-10">Blogs</h1>
+            <h1 className="section-sub-title font-bold text-center mt-10">Blogs</h1>
             <div className="max-w-2xl mx-auto">
                 {posts.map((post) => (
-                    <div key={post.id} className="border border-neutral/10 card rounded p-4 my-10">
+                    <div key={post.id} className="border dark:border-base-300/10 border-neutral/10 card rounded p-4 my-10">
                         <h4>{post.question}</h4>
                     </div>
                 ))}
