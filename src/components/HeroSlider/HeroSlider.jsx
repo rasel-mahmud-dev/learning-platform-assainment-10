@@ -29,7 +29,7 @@ const HeroSlider = () => {
             >
                 <SwiperSlide>
                     <div className="banner-image">
-                        <img className="w-full" src="/8801001_8572.png" alt="" />
+                        <img className="w-full" src="/8801001_8572.jpg" alt="" />
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
