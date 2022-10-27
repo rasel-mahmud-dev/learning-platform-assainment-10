@@ -1,4 +1,32 @@
-.active{
-  color: blue !important;
-  font-weight: bold !important;
+
+
+.main-nav{
+    transition: all .3s ease;
+    transform-origin: top;
+}
+.main-nav.mobile{
+    top: 62px;
+    background: #182136;
+    transform: scaleY(0);
+    opacity: 0;
+
+    @apply flex-col absolute w-full left-0;
+}
+
+.main-nav.expand{
+    transform: scaleY(1);
+    opacity: 1;
+}
+
+@media screen and (max-width: 640px){
+    .main-nav{
+        top: 62px;
+        background: white;
+        opacity: 0;
+        transform: scaleY(0);
+        @apply flex-col absolute w-full left-0 shadow-xl;
+    }
+    .dark .main-nav {
+        background: hsl(219 14% 22%);
+    }
 }

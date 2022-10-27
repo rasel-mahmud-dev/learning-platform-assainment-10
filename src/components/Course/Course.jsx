@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./course.css";
 import Rating from "../Rating";
+import calcDiscountPrice from "../../utils/calcDiscountPrice";
 
 export default function Course({ course }) {
     return (
@@ -11,16 +11,16 @@ export default function Course({ course }) {
                     <div className="">
                         <img className="w-full" src={course.thumb} alt="car!" />
                         <div className="p-2">
-                            <h1 className="">{course.title}</h1>
-                            <h5 className="text-xs text-gray-400">{course?.instructorName}</h5>
+                            <h1 className="dark:text-base-100 text-neutral-focus">{course.title}</h1>
+                            <h5 className="text-sm dark:text-base-300/90 text-neutral/80">{course?.instructorName}</h5>
                             <div className="flex items-center gap-x-2 mt-2">
-                                <span className="text-xs font-bold">{course.rating?.rate}</span>
+                                <span className="text-xs font-semibold">{course.rating?.rate.toFixed(1)}</span>
                                 <Rating rate={course.rating?.rate} id={course.id} />
-                                <span className="text-xs"> {course.rating?.total}</span>
+                                <span className="text-xs font-semibold"> ({course.rating?.total})</span>
                             </div>
-                            <h3 className="text-sm text-gray-800 font-bold mt-1">
-                                <span>${course.price}</span>
-                                <span className="text-gray-400 ml-3">${course.price}</span>
+                            <h3 className="text-sm text-neutral dark:text-base-300  mt-2">
+                                <span className="text-primary-300 font-semibold">${course.price}</span>
+                                <span className="text-gray-400 ml-3 line-through">${calcDiscountPrice(course.price, course.discount)}</span>
                             </h3>
                         </div>
                     </div>

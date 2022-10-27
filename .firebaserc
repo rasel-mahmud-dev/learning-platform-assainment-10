@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "hero-test-auth"
+  },
+  "targets": {
+    "hero-test-auth": {
+      "hosting": {
+        "admin": [
+          "e-coaching1"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

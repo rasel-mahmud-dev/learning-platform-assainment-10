@@ -75,7 +75,7 @@ const LoginPage = () => {
     // password reset mail send form
     function passwordResetModal() {
         return (
-            <Modal title="Reset Password" className="max-w-sm">
+            <Modal title="Reset Password" className="max-w-sm" id="4">
                 <form onSubmit={handlePasswordReset} className="mt-4 dark:text-neutral">
                     {errorMessage && (
                         <p className="bg-red-400/20 text-red-400 text-center py-2 mb-3 rounded-md">{errorMessage}</p>

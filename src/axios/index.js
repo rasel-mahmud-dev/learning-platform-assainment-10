@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const backend = "http://localhost:4000";
-
+const backend = process.env.NODE_ENV === "development" ? "http://localhost:4000" : "https://e-coaching-server.vercel.app"
+console.log(process.env.NODE_ENV)
 const api = axios.create({
     baseURL: backend,
 });

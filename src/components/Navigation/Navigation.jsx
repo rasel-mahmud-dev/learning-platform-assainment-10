@@ -5,6 +5,7 @@ import AppContext from "../../context/AppContext";
 import { FaMoon, FaSignInAlt } from "react-icons/fa";
 import { BsSunFill } from "react-icons/bs";
 import Button from "../Button/Button";
+import {HiBars4} from "react-icons/hi2";
 
 const Navigation = () => {
     const {
@@ -15,6 +16,7 @@ const Navigation = () => {
     const navigate = useNavigate();
 
     const [openAuthMenu, setOpenAuthMenu] = useState(false);
+    const [expandNavigation, setExpandNavigation] = useState(false);
 
     function handleLogOut() {
         logOutHandler()
@@ -50,6 +52,10 @@ const Navigation = () => {
 
         window.localStorage.setItem("theme", theme);
     }
+	
+	function toggleNavigation(){
+		setExpandNavigation(!expandNavigation)
+	}
 
     return (
         <div>
@@ -60,7 +66,7 @@ const Navigation = () => {
                             <img src="/logo.svg" alt="" className="w-40" />
                         </Link>
                     </div>
-                    <div className="flex items-center dark:text-white">
+                    <div className={`flex items-center dark:text-white main-nav ${expandNavigation ? "expand" : ""}`}>
                         <NavLink to="/" className="btn btn-ghost normal-case text-md">
                             Home
                         </NavLink>
@@ -73,23 +79,6 @@ const Navigation = () => {
                         <NavLink to="/faq" className="btn btn-ghost normal-case text-md pr-2">
                             FAQs
                         </NavLink>
-                        <span className="pr-4">
-                            {isDarkMode ? (
-                                <Button
-                                    className="btn-circle normal-case text-md w-6 h-6"
-                                    onClick={() => switchThemeHandler("light")}
-                                >
-                                    <BsSunFill className="text-xl" />
-                                </Button>
-                            ) : (
-                                <Button
-                                    className="btn-circle normal-case text-md w-6 h-6 "
-                                    onClick={() => switchThemeHandler("dark")}
-                                >
-                                    <FaMoon className="text-neutral-focus" />
-                                </Button>
-                            )}
-                        </span>
                     </div>
                     <div className="flex-none">
                         {auth ? (
@@ -131,6 +120,27 @@ const Navigation = () => {
                             </NavLink>
                         )}
                     </div>
+	                <div className="flex items-center">
+		                <span className="pr-3">
+                            {isDarkMode ? (
+		                            <span
+				                            className="btn-circle normal-case text-md w-6 h-6"
+				                            onClick={() => switchThemeHandler("light")}
+		                            >
+                                    <BsSunFill className="text-xl" />
+                                </span>
+                            ) : (
+		                            <span
+				                            className="btn-circle normal-case text-md w-6 h-6 "
+				                            onClick={() => switchThemeHandler("dark")}
+		                            >
+                                    <FaMoon className="text-neutral-focus" />
+                                </span>
+                            )}
+                        </span>
+		                <HiBars4 className="text-2xl block sm:hidden" onClick={toggleNavigation} />
+	                </div>
+	                
                 </div>
             </div>
             <div className="h-16" />
