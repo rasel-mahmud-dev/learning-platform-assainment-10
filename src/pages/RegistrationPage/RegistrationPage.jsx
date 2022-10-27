@@ -1,20 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../../components/Button/Button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BsGithub, BsGoogle } from "react-icons/bs";
-import {  CgLock } from "react-icons/cg";
+import { CgLock } from "react-icons/cg";
 import InputGroup from "../../components/InputGroup/InputGroup";
 
 import AppContext from "../../context/AppContext";
 
 import { createUserWithEmailAndPassword, getAuth, updateProfile } from "firebase/auth";
+import navigateToDestination from "../../utils/navigateToDestination";
 
 const RegistrationPage = (props) => {
     const {
         state: { auth },
-        actions: {  setAuth, loginWithGoogle, loginWithGithub },
+        actions: { setAuth, loginWithGoogle, loginWithGithub },
     } = useContext(AppContext);
+
+    const [errorMessage, setErrorMessage] = useState("");
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -26,6 +29,18 @@ const RegistrationPage = (props) => {
     } = useForm();
 
     const firebaseAuth = getAuth();
+
+    function githubLoginHandler() {
+        loginWithGithub()
+            .then(() => navigateToDestination(location.state, navigate))
+            .catch(() => setErrorMessage("Login fail, please try again"));
+    }
+
+    function googleLoginHandler() {
+	    loginWithGoogle()
+            .then(() => navigateToDestination(location.state, navigate))
+            .catch(() => setErrorMessage("Login fail, please try again"));
+    }
 
     const onSubmit = async (data) => {
         if (Object.keys(errors).length !== 0) return;
@@ -61,6 +76,10 @@ const RegistrationPage = (props) => {
                 <h1 className="text-lg font-bold text-center mt-4 mb-7">Sign Up and Start Learning!</h1>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
+                    {errorMessage && (
+                        <p className="bg-red-400/20 text-red-400 text-center py-2 rounded-md">{errorMessage}</p>
+                    )}
+
                     <InputGroup
                         name="fullName"
                         errors={errors}
@@ -121,7 +140,7 @@ const RegistrationPage = (props) => {
                     <div className="">
                         <Button
                             type="button"
-                            onClick={loginWithGoogle}
+                            onClick={googleLoginHandler}
                             className="bg-red-500 justify-center items-center flex w-full px-4 py-2 border-none text-white font-semibold text-sm rounded-md"
                         >
                             <span className="flex items-center">
@@ -132,7 +151,7 @@ const RegistrationPage = (props) => {
 
                         <Button
                             type="button"
-                            onClick={loginWithGithub}
+                            onClick={githubLoginHandler}
                             className="bg-gray-700 justify-center items-center flex w-full px-4 py-2 border-none text-white font-semibold text-sm rounded-md mt-2"
                         >
                             <span className="flex items-center">

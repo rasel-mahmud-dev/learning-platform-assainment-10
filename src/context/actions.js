@@ -21,3 +21,8 @@ export function fetchAllInstructor() {
             return null;
         });
 }
+
+
+export function fetchCourseCount(){
+	return api.get("/api/courses/count")
+}

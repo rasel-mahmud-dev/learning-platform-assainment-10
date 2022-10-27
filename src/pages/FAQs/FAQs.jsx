@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {FaAngleDown, FaAngleUp} from "react-icons/fa";
 
 const FaQs = () => {
     const questions = [
@@ -55,7 +56,13 @@ const FaQs = () => {
             <div className="max-w-2xl mx-auto my-10">
 		        { questions.map((item=>  (
 						<div className="border dark:border-base-300/10 border-neutral/10 card rounded my-4 ">
-							<h1 className="bg-gray-200 dark:bg-primary-10 dark:text-base-100 text-neutral-focus px-4 py-2 font-semibold cursor-pointer" onClick={()=>handleToggle(item.id)}>{item.question}</h1>
+							<div className="flex justify-between items-center bg-white dark:bg-primary-5 px-4 py-2" onClick={()=>handleToggle(item.id)}>
+								<h1 className="dark:text-base-100 text-neutral-focus  font-semibold cursor-pointer" >{item.question}</h1>
+								{!expandItems.includes(item.id)
+										? <FaAngleDown/>
+										: <FaAngleUp/> }
+							</div>
+							
 							{ expandItems.includes(item.id) && (
 									<div className="p-4">
 										<p className="dark:text-base-300/70 text-neutral">{item.answer}</p>

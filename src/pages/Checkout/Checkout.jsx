@@ -3,26 +3,23 @@ import { useLoaderData } from "react-router-dom";
 import calcDiscountPrice from "../../utils/calcDiscountPrice";
 import Button from "../../components/Button/Button";
 import { BiLock } from "react-icons/bi";
-import AppContext from "../../context/AppContext";
+import toast, { Toaster } from "react-hot-toast";
 
 const Checkout = () => {
     const courseDetail = useLoaderData();
 
-    const {
-        actions: { setMessage },
-    } = useContext(AppContext);
-
     const discountPrice = calcDiscountPrice(courseDetail?.price, courseDetail?.discount);
 
     function checkoutCompleteHandler() {
-        setMessage({
-            text: "Congratulation! You are successfully purchase this course",
-            status: 200,
-        });
+     
+	    toast.success("Congratulation! You are successfully purchase this course");
     }
 
     return (
         <div className="container">
+	        
+	          <Toaster />
+	        
             <div className="max-w-4xl mx-auto my-10">
                 <h1 className="text-3xl font-bold text-neutral-900 text-center mt-10 mb-10 md:mb-20">Checkout</h1>
                 <div className="block md:grid grid-cols-5 gap-x-10">

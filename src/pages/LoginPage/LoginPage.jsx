@@ -7,6 +7,7 @@ import {  CgLock } from "react-icons/cg";
 import AppContext from "../../context/AppContext.jsx";
 import InputGroup from "../../components/InputGroup/InputGroup";
 import Modal from "../../components/Modal/Modal";
+import navigateToDestination from "../../utils/navigateToDestination";
 
 const LoginPage = () => {
     const {
@@ -29,6 +30,8 @@ const LoginPage = () => {
 
     // need for password reset form
     let email = watch("email");
+	
+
 
     const onSubmit = (data) => {
         setErrorMessage("");
@@ -53,6 +56,19 @@ const LoginPage = () => {
                 });
         }
     };
+	
+	function githubLoginHandler(){
+		loginWithGithub().then(()=>	navigateToDestination(location.state, navigate))
+				.catch(()=>	setErrorMessage("Login fail, please try again"))
+	}
+	
+	function googleLoginHandler(){
+		loginWithGoogle().then(()=>	navigateToDestination(location.state, navigate))
+				.catch(()=>
+					setErrorMessage("Login fail, please try again")
+				)
+	}
+	
 
     // handle send mail for password reset
     function handlePasswordReset(event) {
@@ -147,7 +163,7 @@ const LoginPage = () => {
                     <div className="">
                         <Button
                             type="button"
-                            onClick={loginWithGoogle}
+                            onClick={googleLoginHandler}
                             className="bg-red-500 justify-center items-center flex w-full px-4 py-2 border-none text-white font-semibold text-sm rounded-md"
                         >
                             <span className="flex items-center">
@@ -158,7 +174,7 @@ const LoginPage = () => {
 
                         <Button
                             type="button"
-                            onClick={loginWithGithub}
+                            onClick={githubLoginHandler}
                             className="bg-gray-700 justify-center items-center flex w-full px-4 py-2 border-none text-white font-semibold text-sm rounded-md mt-2"
                         >
                             <span className="flex items-center">

@@ -1,5 +1,6 @@
 import React from "react";
 
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -27,20 +28,20 @@ const HeroSlider = () => {
                 navigation={true}
             >
                 <SwiperSlide>
-                    <div>
-                        <img className="w-full" src="/8801001_8572.jpg" alt="" />
+                    <div className="banner-image">
+                        <img className="w-full" src="/8801001_8572.png" alt="" />
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
                     {" "}
-                    <div>
-                        <img src="/8801001_8572.jpg" alt="" />
+                    <div className="banner-image">
+                        <img src="/cartoon-web-design-background_52683-70879.jpg" alt="" />
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
                     {" "}
-                    <div>
-                        <img src="/8801001_8572.jpg" alt="" />
+                    <div className="banner-image">
+                        <img src="/professional-programmer-working-late-dark-office.jpg" alt="" />
                     </div>
                 </SwiperSlide>
             </Swiper>

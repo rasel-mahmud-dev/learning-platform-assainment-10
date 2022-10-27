@@ -5,7 +5,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import Courses, { fetchAllCourses } from "./pages/Courses/Courses";
 import CourseDetail, { fetchCourseDetail } from "./pages/CourseDetail/CourseDetail";
-import AboutPage from "./pages/AboutPage/AboutPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
 import BlogPage from "./pages/BlogPage/BlogPage";
@@ -14,6 +13,7 @@ import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import PrivateRoute from "./middleware/PrivateRoute";
 import Checkout from "./pages/Checkout/Checkout";
 import NotFound from "./components/NotFound/NotFound";
+import ExcludeAuthRoute from "./middleware/ExcludeAuthRoute";
 
 const router = createBrowserRouter([
     {
@@ -28,7 +28,14 @@ const router = createBrowserRouter([
                 loader: fetchCourseDetail,
                 element: <CourseDetail />,
             },
-            { path: "/login", element: <LoginPage /> },
+            {
+                path: "/login",
+                element: (
+                    <ExcludeAuthRoute>
+                        <LoginPage />
+                    </ExcludeAuthRoute>
+                ),
+            },
             {
                 path: "/checkout/:courseId",
                 loader: fetchCourseDetail,
@@ -46,8 +53,14 @@ const router = createBrowserRouter([
                     </PrivateRoute>
                 ),
             },
-            { path: "/registration", element: <RegistrationPage /> },
-            { path: "/about", element: <AboutPage /> },
+            {
+                path: "/registration",
+                element: (
+                    <ExcludeAuthRoute>
+                        <RegistrationPage />
+                    </ExcludeAuthRoute>
+                ),
+            },
             { path: "/blogs", element: <BlogPage /> },
             { path: "/faq", element: <FAQs /> },
         ],

@@ -4,8 +4,7 @@ import "./navigation.css";
 import AppContext from "../../context/AppContext";
 import { FaMoon, FaSignInAlt } from "react-icons/fa";
 import { BsSunFill } from "react-icons/bs";
-import Button from "../Button/Button";
-import {HiBars4} from "react-icons/hi2";
+import { HiBars4 } from "react-icons/hi2";
 
 const Navigation = () => {
     const {
@@ -52,10 +51,10 @@ const Navigation = () => {
 
         window.localStorage.setItem("theme", theme);
     }
-	
-	function toggleNavigation(){
-		setExpandNavigation(!expandNavigation)
-	}
+
+    function toggleNavigation() {
+        setExpandNavigation(!expandNavigation);
+    }
 
     return (
         <div>
@@ -67,21 +66,38 @@ const Navigation = () => {
                         </Link>
                     </div>
                     <div className={`flex items-center dark:text-white main-nav ${expandNavigation ? "expand" : ""}`}>
-                        <NavLink onClick={()=>setExpandNavigation(false)} to="/" className="btn btn-ghost normal-case text-md">
+                        <NavLink end={true}
+                            onClick={() => setExpandNavigation(false)}
+                            to="/"
+                            
+                            className="btn btn-ghost normal-case text-md"
+                        >
                             Home
                         </NavLink>
-                        <NavLink onClick={()=>setExpandNavigation(false)} to="/courses" className="btn btn-ghost normal-case text-md">
+                        <NavLink
+                            onClick={() => setExpandNavigation(false)}
+                            to="/courses"
+                            className="btn btn-ghost normal-case text-md"
+                        >
                             Courses
                         </NavLink>
-                        <NavLink onClick={()=>setExpandNavigation(false)} to="/blogs" className="btn btn-ghost normal-case text-md">
+                        <NavLink
+                            onClick={() => setExpandNavigation(false)}
+                            to="/blogs"
+                            className="btn btn-ghost normal-case text-md"
+                        >
                             Blogs
                         </NavLink>
-                        <NavLink onClick={()=>setExpandNavigation(false)} to="/faq" className="btn btn-ghost normal-case text-md pr-2">
+                        <NavLink
+                            onClick={() => setExpandNavigation(false)}
+                            to="/faq"
+                            className="btn btn-ghost normal-case text-md "
+                        >
                             FAQs
                         </NavLink>
                     </div>
                     <div className="flex-none">
-                        {auth ? (
+                        {auth && (
                             <div
                                 className="relative "
                                 onMouseOver={() => setOpenAuthMenu(true)}
@@ -113,34 +129,37 @@ const Navigation = () => {
                                     </li>
                                 </ul>
                             </div>
-                        ) : (
-                            <NavLink to="/login" className="btn btn-ghost normal-case text-md dark:text-white">
-                                <FaSignInAlt />
-                                <span className="ml-1">Login</span>
-                            </NavLink>
                         )}
                     </div>
-	                <div className="flex items-center">
-		                <span className="pr-3">
+                    <div className="flex items-center">
+                        <span className="pl-3">
                             {isDarkMode ? (
-		                            <span
-				                            className="btn-circle normal-case text-md w-6 h-6"
-				                            onClick={() => switchThemeHandler("light")}
-		                            >
-                                    <BsSunFill className="text-xl" />
+                                <span
+                                    className="btn-circle normal-case text-md w-6 h-6"
+                                    onClick={() => switchThemeHandler("light")}
+                                >
+                                    <BsSunFill className="text-2xl" />
                                 </span>
                             ) : (
-		                            <span
-				                            className="btn-circle normal-case text-md w-6 h-6 "
-				                            onClick={() => switchThemeHandler("dark")}
-		                            >
-                                    <FaMoon className="text-neutral-focus" />
+                                <span
+                                    className="btn-circle normal-case text-md w-6 h-6 "
+                                    onClick={() => switchThemeHandler("dark")}
+                                >
+                                    <FaMoon className="text-xl text-neutral-focus" />
                                 </span>
                             )}
                         </span>
-		                <HiBars4 className="text-2xl block sm:hidden" onClick={toggleNavigation} />
-	                </div>
-	                
+                        <div className="pl-4">
+                            <HiBars4 className="text-2xl block sm:hidden" onClick={toggleNavigation} />
+                        </div>
+                    </div>
+
+                    {!auth && (
+                        <NavLink to="/login" className="btn btn-ghost normal-case text-md dark:text-white !pr-0">
+                            <FaSignInAlt />
+                            <span className="ml-1">Login</span>
+                        </NavLink>
+                    )}
                 </div>
             </div>
             <div className="h-16" />

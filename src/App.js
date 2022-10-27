@@ -32,7 +32,6 @@ function App() {
 				setAuthLoaded(true);
 			} else {
 				// User is signed out
-				console.log("User signed out");
 				setAuthLoaded(true);
 				setAuth(null);
 			}

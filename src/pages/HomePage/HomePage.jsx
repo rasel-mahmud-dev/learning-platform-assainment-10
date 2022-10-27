@@ -10,6 +10,29 @@ import Instructor from "../../components/Instructor/Instructor";
 import HeroSlider from "../../components/HeroSlider/HeroSlider";
 import TestimonialSlider from "../../components/TestimonialSlider/TestimonialSlider";
 
+const exploreCourseData = [
+    { category: "Data Science", courses: "425", image: "/data-science.jpg" },
+    { category: "Web Development", courses: "70", image: "/web-development.png" },
+    { category: "Business", courses: "1095", image: "/teamwork-3213924__340.webp" },
+    {
+        category: "Computer Science",
+        courses: "668",
+        image: "/businessman-searching-big-datadigital-transformation-260nw-1496224217.webp",
+    },
+    { category: "Health", courses: "471", image: "/istockphoto-478360036-612x612.jpg" },
+    { category: "Social Sciences", courses: "401", image: "/social-science.png" },
+    { category: "Personal Development", courses: "137", image: "/Personal-Development.png" },
+    { category: "Arts and Humanities", courses: "338", image: "/Arts-and-Humanities.jpg" },
+    {
+        category: "Physical Science and Engineering",
+        courses: "413",
+        image: "/Physical-Science-and-Engineering.jpg",
+    },
+    { category: "Language Learning", courses: "150", image: "/Language-Learning.jpeg" },
+    { category: "Information Technology", courses: "145", image: "/Information-Technology-thumbnail.jpg" },
+    { category: "Math and Logic", courses: "70", image: "/Math-and-Logic.jpg" },
+];
+
 const HomePage = (props) => {
     const {
         state: { courses, categories, instructors },
@@ -58,40 +81,7 @@ const HomePage = (props) => {
         }
         setFilterByPopularCourse(courseId);
     }
-
-    const data = [
-        { category: "Data Science", courses: "425", image: "/data-science.jpg" },
-
-        { category: "Web Development", courses: "70", image: "/web-development.png" },
-
-        { category: "Business", courses: "1095", image: "/teamwork-3213924__340.webp" },
-
-        {
-            category: "Computer Science",
-            courses: "668",
-            image: "/businessman-searching-big-datadigital-transformation-260nw-1496224217.webp",
-        },
-
-        { category: "Health", courses: "471", image: "/istockphoto-478360036-612x612.jpg" },
-
-        { category: "Social Sciences", courses: "401", image: "/social-science.png" },
-
-        { category: "Personal Development", courses: "137", image: "/Personal-Development.png" },
-
-        { category: "Arts and Humanities", courses: "338", image: "/Arts-and-Humanities.jpg" },
-
-        {
-            category: "Physical Science and Engineering",
-            courses: "413",
-            image: "/Physical-Science-and-Engineering.jpg",
-        },
-
-        { category: "Language Learning", courses: "150", image: "/Language-Learning.jpeg" },
-
-        { category: "Information Technology", courses: "145", image: "/Information-Technology-thumbnail.jpg" },
-
-        { category: "Math and Logic", courses: "70", image: "/Math-and-Logic.jpg" },
-    ];
+	
 
     return (
         <div className="home-page">
@@ -111,14 +101,13 @@ const HomePage = (props) => {
                                     className="flex flex-col md:flex-row justify-center items-start gap-5 p-5"
                                     key={index}
                                 >
-                                    <img className="w-10 mx-auto md:mx-none " src="/category_1_1.svg" alt="logo" />
+                                    <img className="w-10 mx-auto md:mx-none " src={cat.logo} alt="logo" />
                                     <div className="text-center md:text-start">
                                         <h4 className="text-2xl text-neutral dark:text-base-300/90 font-medium">
                                             {cat.name}
                                         </h4>
                                         <p className="dark:text-base-300/70 text-neutral/90 mt-2">
-                                            Globally maintain magnetic process with model foster data after ubiuitous
-                                            architectures.
+                                            {cat.desc}
                                         </p>
                                     </div>
                                 </div>
@@ -126,56 +115,6 @@ const HomePage = (props) => {
                     </div>
                 </div>
             </section>
-
-            {/******* Core Features *******/}
-            {/*<section>*/}
-            {/*    <div className="!max-w-5xl mx-auto">*/}
-            {/*        <h4 className="section-title">MORE ABOUT US</h4>*/}
-            {/*        <h1 className="section-sub-title">*/}
-            {/*            We are innovative educational institution to the creation of the student*/}
-            {/*        </h1>*/}
-            {/*        <p className="mt-10 text-center section-desc">*/}
-            {/*            Compellingly procrastinate equity invested markets with efficient process improvements.*/}
-            {/*            Collaboratively actualize mission-critical partnerships with integrated portals. Authoritatively*/}
-            {/*            optimize low-risk high-yield metrics and plug-and-play potentialities.*/}
-            {/*        </p>*/}
-            {/*        <div className="mt-10 flex items-center justify-evenly">*/}
-            {/*            <li className="list-none flex items-start gap-2">*/}
-            {/*                <div>*/}
-            {/*                    <img src="/counter_1_1.svg" alt="" />*/}
-            {/*                </div>*/}
-            {/*                <span>*/}
-            {/*                    <p className="text-2xl text-blue font-bold text-primary-400">250</p>*/}
-            {/*                    <p className="dark:text-base-300/70 text-neutral/90 font-medium text-sm">*/}
-            {/*                        FINISHED WEBINARS*/}
-            {/*                    </p>*/}
-            {/*                </span>*/}
-            {/*            </li>*/}
-            {/*            <li className="list-none flex items-start gap-2">*/}
-            {/*                <div>*/}
-            {/*                    <img src="/counter_1_1.svg" alt="" />*/}
-            {/*                </div>*/}
-            {/*                <span>*/}
-            {/*                    <p className="text-2xl text-blue font-bold text-primary-400">250</p>*/}
-            {/*                    <p className="dark:text-base-300/70 text-neutral/90 font-medium text-sm">*/}
-            {/*                        FINISHED WEBINARS*/}
-            {/*                    </p>*/}
-            {/*                </span>*/}
-            {/*            </li>*/}
-            {/*            <li className="list-none flex items-start gap-2">*/}
-            {/*                <div>*/}
-            {/*                    <img src="/counter_1_1.svg" alt="" />*/}
-            {/*                </div>*/}
-            {/*                <span>*/}
-            {/*                    <p className="text-2xl text-blue font-bold text-primary-400">250</p>*/}
-            {/*                    <p className="dark:text-base-300/70 text-neutral/90 font-medium text-sm">*/}
-            {/*                        FINISHED WEBINARS*/}
-            {/*                    </p>*/}
-            {/*                </span>*/}
-            {/*            </li>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</section>*/}
 
             {/***** More About us *******/}
             <section className="">
@@ -185,14 +124,17 @@ const HomePage = (props) => {
                         We are innovative educational institution to the creation of the student
                     </h1>
                     <p className="mt-10 text-center section-desc">
-                        Compellingly procrastinate equity invested markets with efficient process improvements.
-                        Collaboratively actualize mission-critical partnerships with integrated portals. Authoritatively
-                        optimize low-risk high-yield metrics and plug-and-play potentialities.
+                        We envision a world where anyone, anywhere has the power to transform their life through
+                        learning.
                     </p>
                     <div className="mt-10 flex flex-col md:flex-row gap-10 md:gap-2 items-center justify-evenly ">
                         <li className="list-none flex items-center md:items-start gap-2 flex-col md:flex-row text-center md:text-start">
                             <div>
-                                <img className="w-14" src="/pngtree-live-webinar-poster-png-image_6690801_prev_ui.png" alt="" />
+                                <img
+                                    className="w-14"
+                                    src="/pngtree-live-webinar-poster-png-image_6690801_prev_ui.png"
+                                    alt=""
+                                />
                             </div>
                             <span>
                                 <p className="text-2xl text-blue font-bold text-primary-400">250</p>
@@ -204,7 +146,8 @@ const HomePage = (props) => {
                         <li className="list-none flex items-center md:items-start gap-2 flex-col md:flex-row  text-center md:text-start">
                             <div>
                                 <img src="/satisfaction-rating-_prev_ui.png" className="w-20" alt="" />
-                            </div>                            <span>
+                            </div>{" "}
+                            <span>
                                 <p className="text-2xl text-blue font-bold text-primary-400">100%</p>
                                 <p className="dark:text-base-300/70 text-neutral/90 font-medium text-sm">
                                     SATISFACTION RATE
@@ -213,7 +156,11 @@ const HomePage = (props) => {
                         </li>
                         <li className="list-none flex items-center md:items-start gap-2 flex-col md:flex-row  text-center md:text-start">
                             <div>
-                                <img className="w-20" src="/lovepik-a-man-hiring-with-a-loudspeaker-png-image_401006145_wh300_prev_ui.png" alt="" />
+                                <img
+                                    className="w-20"
+                                    src="/lovepik-a-man-hiring-with-a-loudspeaker-png-image_401006145_wh300_prev_ui.png"
+                                    alt=""
+                                />
                             </div>
                             <span>
                                 <p className="text-2xl text-blue font-bold text-primary-400">100</p>
@@ -232,8 +179,8 @@ const HomePage = (props) => {
                     <h4 className="section-title">Explore E-Coaching</h4>
                     <h1 className="section-sub-title">We provide different kind of Courses</h1>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-6 md:mt-10">
-                        {data &&
-                            data.map((cat, index) => (
+                        {exploreCourseData &&
+                            exploreCourseData.map((cat, index) => (
                                 <div className="card !rounded-lg shadow bg-base-100 dark:bg-primary-5" key={index}>
                                     <div className="card-wrapper">
                                         <img className="mx-auto card-image" src={cat.image} alt="logo" />
@@ -267,11 +214,12 @@ const HomePage = (props) => {
                     <h4 className="section-title">POPULAR COURSES</h4>
                     <h1 className="section-sub-title">Our Popular Courses</h1>
                     <p className="section-desc !max-w-5xl text-center mx-auto mt-10">
-                        Compellingly procrastinate equity invested markets with efficient process improvements.
-                        Collaboratively actualize mission-critical partnerships with integrated portals. Authoritatively
-                        optimize low-risk high-yield metrics and plug-and-play potentialities.
+                       Our most popular courses that are frequently enrolled by students,
+                       varies categories course like web development,
+                       machine learning, video editing etc and courses with we provide a
+                       free certificate after completion
                     </p>
-                    <div className="mt-10 !max-w-5xl mx-auto flex flex-wrap items-center justify-center gap-3">
+                    <div className="mt-10 !max-w-3xl mx-auto flex flex-wrap items-center justify-center gap-3">
                         <li
                             onClick={() => handleFilterPopularCourse(0)}
                             className={`list-none px-4 py-1 text-sm rounded cursor-pointer
@@ -319,12 +267,13 @@ const HomePage = (props) => {
             {/***** Our Instructor *******/}
             <section className="">
                 <div className="container mx-auto">
-                    <h4 className="section-title">BEST ONLINE INSTRUCTOR</h4>
-                    <h1 className="section-sub-title">Our Popular Courses</h1>
+                    <h4 className="section-title">OUR INSTRUCTORS</h4>
+                    <h1 className="section-sub-title">Our Best Instructor</h1>
                     <p className="mt-10 !max-w-5xl mx-auto text-center section-desc">
-                        Seamlessly target robust quality vectors and goals oriented architectures propriately enegdrages
-                        one-to-one resources after standardized scenarios adaptive experiences exceptional resources
-                        service depend lifestyle carefully
+                        They have  skills in communication, listening, collaboration, adaptability, empathy and patience.
+                        Other characteristics of effective teaching include an engaging classroom presence,
+                        value in real-world learning, exchange of best practices and a lifelong love of learning
+	                    
                     </p>
                     <div className="mt-10 grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
                         {instructors &&
