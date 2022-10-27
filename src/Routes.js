@@ -22,7 +22,7 @@ const router = createBrowserRouter([
         errorElement: <NotFound />,
         children: [
             { path: "/", element: <HomePage />, loader: fetchAllCourses },
-            { path: "/courses", element: <Courses />, loader: fetchAllCourses },
+            { path: "/courses", element: <Courses /> },
             {
                 path: "/course-detail/:courseId",
                 loader: fetchCourseDetail,

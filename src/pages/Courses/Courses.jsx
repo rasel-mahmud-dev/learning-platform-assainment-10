@@ -8,6 +8,7 @@ import { useLoaderData } from "react-router-dom";
 import { fetchCategories, fetchCourseCount } from "../../context/actions";
 import { FaFilter, FaTimes } from "react-icons/fa";
 import Button from "../../components/Button/Button";
+import Loader from "../../components/Loader";
 
 const languageData = ["Bangla", "English", "Hindy"];
 
@@ -18,9 +19,8 @@ const Courses = () => {
     } = useContext(AppContext);
 
     const [isOpenSidebar, setOpenSidebar] = useState(false);
-
-    let coursesData = useLoaderData();
-
+	const [courseLoading, setCourseLoading] = useState(true)
+	
     const [filter, setFilter] = useState({
         category: [],
         ratings: [],
@@ -37,12 +37,18 @@ const Courses = () => {
         fetchCourseCount().then(({ data }) => {
             setTotalCourse(data);
         });
-
-        // store courses in global state for caching
-	    if(coursesData) {
-		    setCourses(coursesData);
-		    setFilteredCourses(coursesData);
-	    }
+	
+	    fetchAllCourses().then(coursesData=>{
+		    // store courses in global state for caching
+		    if(coursesData) {
+			    setCourses(coursesData);
+			    setFilteredCourses(coursesData);
+			    setCourseLoading(false)
+		    }
+	    }).catch(ex=>{
+		    setCourseLoading(false)
+	    })
+	    
         // store categories in global state for caching
         if (!categories) {
             fetchCategories()
@@ -59,21 +65,26 @@ const Courses = () => {
 
     // observation for filter category
     useEffect(() => {
+		
+		setCourseLoading(true)
+		
         let categoryIds = [];
         let languages = filter.language;
         let ratings = filter.ratings;
         if (filter.category.length) {
             categoryIds = filter.category.map((c) => c.id);
         }
-
+		
         api.post("/api/courses/filter", { categoryIds, languages, ratings })
             .then(({ data, status }) => {
                 if (status === 200) {
                     setFilteredCourses(data);
                 }
+	            setCourseLoading(false)
             })
             .catch((ex) => {
                 console.log(ex);
+	            setCourseLoading(false)
             });
     }, [filter.category.length, filter.ratings.length, filter.language.length]);
 
@@ -129,7 +140,6 @@ const Courses = () => {
             language: [],
         });
     }
-
     return (
         <div className="container !px-0">
             <div className="">
@@ -236,13 +246,21 @@ const Courses = () => {
                                 <FaFilter className="font-medium text-sm " />
                             </div>
                         </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+	                    {!courseLoading && <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
                             {filteredCourses.length
                                 ? filteredCourses?.map((course) => <Course course={course} key={course.id} />)
                                 : courses &&
                                   courses.length &&
                                   courses?.map((course) => <Course course={course} key={course.id} />)}
-                        </div>
+                        </div>}
+	                    
+	                    {/***** Loading ******/}
+	                    <div>
+		                    {courseLoading && (
+								<Loader title="Fetching Courses" />
+		                    )}
+	                    </div>
+	                    
                     </div>
                 </div>
             </div>
