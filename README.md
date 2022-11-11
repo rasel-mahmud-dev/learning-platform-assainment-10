@@ -3,8 +3,6 @@
 
 ## Assignment 10
 
-### Github Repo: https://github.com/programming-hero-web-course1/b610-learning-platform-client-side-rasel-mahmud-dev
-
 ### Live site: http://e-coaching1.web.app
 
 
